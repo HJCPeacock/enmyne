@@ -9,7 +9,7 @@ var processTowers = require('process.towers');
 module.exports.loop = function () {
     
     //params: builders, harvesters, upgraders, repairers, attackers
-    processSpawning.run(1, 2, 2, 2, 0);
+    processSpawning.run(1, 2, 3, 2, 0);
 
     //run roles
     var repairerCounter = 0;
