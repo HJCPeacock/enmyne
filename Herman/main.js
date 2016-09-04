@@ -9,7 +9,7 @@ var processTowers = require('process.towers');
 module.exports.loop = function () {
     
     //params: builders, harvesters, upgraders, repairers, attackers
-    processSpawning.run(1, 2, 2, 1, 0);
+    processSpawning.run(1, 2, 3, 1, 0);
 
     //run roles
     for(var name in Game.creeps) {
