@@ -29,6 +29,7 @@ var roleHarvester = {
                     creep.moveTo(target);
                 }
             }
+            else creep.memory.harvesting = true;
         }
 	}
 };
