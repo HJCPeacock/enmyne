@@ -9,10 +9,9 @@ var processTowers = require('process.towers');
 module.exports.loop = function () {
     
     //params: builders, harvesters, upgraders, repairers, attackers
-    processSpawning.run(1, 2, 3, 2, 0);
+    processSpawning.run(1, 2, 2, 1, 0);
 
     //run roles
-    var repairerCounter = 0;
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
         if(creep.memory.role == 'harvester') {
@@ -25,8 +24,7 @@ module.exports.loop = function () {
             roleBuilder.run(creep);
         }
         if(creep.memory.role == 'repairer') {
-            roleRepairer.run(creep, repairerCounter);
-            repairerCounter++;
+            roleRepairer.run(creep);
         }
         if(creep.memory.role == 'attacker') {
             roleAttacker.run(creep);

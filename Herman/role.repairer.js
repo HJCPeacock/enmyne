@@ -1,7 +1,7 @@
 var roleRepair = {
 
     /** @param {Creep} creep **/
-    run: function(creep,repairerCounter) {
+    run: function(creep) {
 
 	    if(creep.memory.repairing && creep.carry.energy == 0) {
             creep.memory.repairing = false;
@@ -30,7 +30,7 @@ var roleRepair = {
                                 );
                     }
             });
-            if (repairerCounter > 0 && targetsRamp.length > 0) {
+            if (creep.memory.role == 'builder' && targetsRamp.length > 0) {
                 if(creep.repair(targetsRamp[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targetsRamp[0]);
                 }
