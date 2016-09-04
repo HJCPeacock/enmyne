@@ -11,8 +11,6 @@ module.exports.loop = function () {
     //params: builders, harvesters, upgraders, repairers, attackers
     processSpawning.run(1, 3, 2, 2, 0);
 
-    //test
-    
     //run roles
     var repairerCounter = 0;
     for(var name in Game.creeps) {
@@ -34,8 +32,6 @@ module.exports.loop = function () {
             roleAttacker.run(creep);
         }
     }
-    
-    //processTowers.run(Game.getObjectById('57c7c65e4ebebf94771c3a55'));
     
     //run towers
     var towers = Game.rooms['W59S26'].find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
