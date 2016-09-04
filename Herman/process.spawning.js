@@ -17,10 +17,27 @@ var processSpawning = {
         var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attacker');
         
         //Body Parts
-        var harvesterBody = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
-        var builderBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
-        var upgraderBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE]; //0.5 * 11 / 5 = 0.64  | 9 * 1 - 2 * 7 = 9 - 14 = -5
-        var repairerBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
+        //time
+        //t = ceil(k * W / M)
+
+        //Where:
+        //t = time (game ticks)
+        //k = terrain factor (1x for plain, 0.5x for road, 5x for swamp)
+        //W = creep weight (Number of body parts, excluding MOVE and empty CARRY parts)
+        //M = number of MOVE parts
+
+        //Fatigue
+        //F = W * K - 2 * M
+
+        //Where:
+        //F = initial fatigue value
+        //W = creep weight (Number of body parts, excluding MOVE and empty CARRY parts)
+        //K = terrain factor (1x for road, 2x for plain, 10x for swamp)
+        //M = number of MOVE parts
+        var harvesterBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; //950 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
+        var builderBody = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//950 | 1 * 8 / 8 = 1 | 8 * 2 - 2 * 8 = 0
+        var upgraderBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; //950 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
+        var repairerBody = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//950 | 1 * 8 / 8 = 1 | 8 * 2 - 2 * 8 = 0
         var attackerBody = [WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,RANGED_ATTACK];
     
         if (harvesters.length < hervesterlimit && spawn.canCreateCreep(harvesterBody, undefined) == OK) {
