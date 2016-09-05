@@ -10,7 +10,7 @@ module.exports.loop = function () {
     
     //params: builders, harvesters, upgraders, repairers, attackers
     processSpawning.run(1, 2, 3, 1, 0);
-
+    //test
     //run roles
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
