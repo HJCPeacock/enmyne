@@ -27,7 +27,7 @@ var roleUpgrader = {
             }
 	    }
 	    if (begingcounter) counter++;
-	    creep.say(counter);
+	    if (creep.name == 'Grayson') creep.say(counter);
 	}
 };
 
