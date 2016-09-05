@@ -1,4 +1,4 @@
-﻿var processRenewing = {
+var processRenewing = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
