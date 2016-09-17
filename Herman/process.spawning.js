@@ -36,11 +36,11 @@ var processSpawning = {
         //W = creep weight (Number of body parts, excluding MOVE and empty CARRY parts)
         //K = terrain factor (1x for road, 2x for plain, 10x for swamp)
         //M = number of MOVE parts
-        var harvesterBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; //950 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
-        var carrierJnrBody = [WORK, WORK, CARRY, MOVE, MOVE, MOVE]; //400 | | 3 * 2 - 2 * 3 = 0
-        var carrierBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; //950 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
+        var harvesterBody = [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE]; //1200 | 0.5 * 10 / 5 = 1  | 8 * 1 - 2 * 4 = 8 - 8 = 0
+        var carrierJnrBody = [CARRY, CARRY, CARRY, CARRY, MOVE]; //250 | | 4 * 2 - 2 * 3 = 2
+        var carrierBody = [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; //550 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
         var builderBody = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//950 | 1 * 8 / 8 = 1 | 8 * 2 - 2 * 8 = 0
-        var upgraderBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; //950 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
+        var upgraderBody = [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE]; //950 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
         var repairerBody = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//950 | 1 * 8 / 8 = 1 | 8 * 2 - 2 * 8 = 0
         var attackerBody = [WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,RANGED_ATTACK];
     
