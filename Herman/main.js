@@ -5,9 +5,14 @@ var roleRepairer = require('role.repairer');
 var roleAttacker = require('role.attack');
 var processSpawning = require('process.spawning');
 var processTowers = require('process.towers');
+var processLinks = require('process.links');
 
 module.exports.loop = function () {
-    
+
+    //All Rooms
+    processLinks.run();
+
+    //For room W59S26
     //params: builders, harvesters, upgraders, repairers, attackers
     processSpawning.run(1, 2, 3, 1, 0);
    
