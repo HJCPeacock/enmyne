@@ -1,4 +1,6 @@
 var roleHarvester = require('role.harvester');
+var roleCarrierJnr = require('role.carrierjnr');
+var roleCarrier = require('role.carrier');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
@@ -13,8 +15,8 @@ module.exports.loop = function () {
     processLinks.run();
 
     //For room W59S26
-    //params: builders, harvesters, upgraders, repairers, attackers
-    processSpawning.run(1, 2, 3, 1, 0);
+    //params: builders, harvesters, upgraders, repairers, attackers, carriers
+    processSpawning.run(2, Game.rooms['W59S26'].find(FIND_SOURCES).length, 2, 0, 0, 1);
    
     //run roles for room W59S26
     var myScreeps = Game.rooms['W59S26'].find(FIND_MY_CREEPS)
@@ -22,6 +24,12 @@ module.exports.loop = function () {
         var creep = myScreeps[name];
         if (creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
+        }
+        if (creep.memory.role == 'carrierjnr') {
+            roleCarrierJnr.run(creep);
+        }
+        if (creep.memory.role == 'carrier') {
+            roleCarrier.run(creep);
         }
         if(creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);

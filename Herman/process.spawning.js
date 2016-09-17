@@ -1,5 +1,5 @@
 var processSpawning = {
-    run: function(builderLimit, hervesterlimit, upgraderLimit, repairerLimit, attackerLimit) {
+    run: function(builderLimit, hervesterlimit, upgraderLimit, repairerLimit, attackerLimit, carrierLimit) {
         
         var spawn = Game.spawns['Spawn1'];
 
@@ -15,6 +15,8 @@ var processSpawning = {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
         var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
         var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attacker');
+        var carrierJnrs = _.filter(Game.creeps, (creep) => creep.memory.role == 'carrierjnr');
+        var carriers = _.filter(Game.creeps, (creep) => creep.memory.role == 'carrier');
         
         //Body Parts
         //time
@@ -35,14 +37,24 @@ var processSpawning = {
         //K = terrain factor (1x for road, 2x for plain, 10x for swamp)
         //M = number of MOVE parts
         var harvesterBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; //950 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
+        var carrierJnrBody = [WORK, WORK, CARRY, MOVE, MOVE, MOVE]; //400 | | 3 * 2 - 2 * 3 = 0
+        var carrierBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; //950 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
         var builderBody = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//950 | 1 * 8 / 8 = 1 | 8 * 2 - 2 * 8 = 0
         var upgraderBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; //950 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
         var repairerBody = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//950 | 1 * 8 / 8 = 1 | 8 * 2 - 2 * 8 = 0
         var attackerBody = [WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,RANGED_ATTACK];
     
         if (harvesters.length < hervesterlimit && spawn.canCreateCreep(harvesterBody, undefined) == OK) {
-            var newName = spawn.createCreep(harvesterBody, undefined, {role: 'harvester', harvesting: true});
+            var newName = spawn.createCreep(harvesterBody, undefined, {role: 'harvester', harvesting: true, source: getSourceCount() == 0 ? 0 : 1});
             console.log('Spawning new harvester: ' + newName);
+        }
+        else if (carrierJnrs.length < 1 && spawn.canCreateCreep(carrierJnrBody, undefined) == OK) {
+            var newName = spawn.createCreep(carrierJnrBody, undefined, { role: 'carrierjnr', harvesting: true });
+            console.log('Spawning new carrierjnr: ' + newName);
+        }
+        else if (carriers.length < carrierLimit && spawn.canCreateCreep(carrierBody, undefined) == OK) {
+            var newName = spawn.createCreep(carrierBody, undefined, { role: 'carrier', harvesting: true });
+            console.log('Spawning new carrier: ' + newName);
         }
         else if (builders.length < builderLimit && spawn.canCreateCreep(builderBody, undefined) == OK) {
             var newName = spawn.createCreep(builderBody, undefined, {role: 'builder', building: false, repairing: false});
@@ -59,6 +71,10 @@ var processSpawning = {
         else if (attackers.length < attackerLimit && spawn.canCreateCreep(attackerBody, undefined) == OK) {
             var newName = spawn.createCreep(attackerBody, undefined, {role: 'attacker', repairing: false});
             console.log('Spawning new attacker: ' + newName);
+        }
+
+        function getSourceCount () {
+            return _.filter(harvesters, (creep) => creep.memory.source == 0).length;
         }
 	}
 };
