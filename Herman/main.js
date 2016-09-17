@@ -11,10 +11,11 @@ module.exports.loop = function () {
     //params: builders, harvesters, upgraders, repairers, attackers
     processSpawning.run(1, 2, 3, 1, 0);
    
-    //run roles
-    for(var name in Game.creeps) {
-        var creep = Game.creeps[name];
-        if(creep.memory.role == 'harvester') {
+    //run roles for room W59S26
+    var myScreeps = Game.rooms['W59S26'].find(FIND_MY_CREEPS)
+    for (var name in myScreeps) {
+        var creep = myScreeps[name];
+        if (creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
         }
         if(creep.memory.role == 'upgrader') {
@@ -31,7 +32,7 @@ module.exports.loop = function () {
         }
     }
     
-    //run towers
+    //run towers for room W59S26
     var towers = Game.rooms['W59S26'].find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
     for(var towerCounter = 0; towerCounter < towers.length; towerCounter++)
     {
