@@ -14,14 +14,21 @@ var roleUpgrader = {
 	    }
         
 	    if(!creep.memory.upgrading) {
-	        var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+	        var sourceStorage = creep.pos.findClosestByRange(FIND_STRUCTURES, {
 	            filter: (structure) => {
 	                return structure.structureType == STRUCTURE_STORAGE;
 	            }
 	        });
-	        if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source);
-            }
+	        if (sourceStorage) {
+	            if (creep.withdraw(sourceStorage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+	                creep.moveTo(sourceStorage);
+	            }
+	        } else {
+	            var sources = creep.room.find(FIND_SOURCES);
+	            if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+	                creep.moveTo(sources[0]);
+	            }
+	        }
         }
         else {
             if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
