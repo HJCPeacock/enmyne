@@ -1,4 +1,4 @@
-﻿var roleCarrierJnr = {
+var roleCarrierJnr = {
     run: function (creep) {
         if (!creep.memory.harvesting && creep.carry.energy == 0) {
             creep.memory.harvesting = true;
