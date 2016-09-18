@@ -1,5 +1,5 @@
 var processSpawning = {
-    run: function(builderLimit, hervesterlimit, upgraderLimit, repairerLimit, attackerLimit, carrierLimit) {
+    run: function(builderLimit, hervesterlimit, upgraderLimit, attackerLimit, carrierLimit) {
         
         var spawn = Game.spawns['Spawn1'];
 
@@ -13,7 +13,6 @@ var processSpawning = {
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
-        var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
         var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attacker');
         var carrierJnrs = _.filter(Game.creeps, (creep) => creep.memory.role == 'carrierjnr');
         var carriers = _.filter(Game.creeps, (creep) => creep.memory.role == 'carrier');
@@ -41,7 +40,6 @@ var processSpawning = {
         var carrierBody = [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; //550 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
         var builderBody = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//950 | 1 * 8 / 8 = 1 | 8 * 2 - 2 * 8 = 0
         var upgraderBody = [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]; //950 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
-        var repairerBody = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//950 | 1 * 8 / 8 = 1 | 8 * 2 - 2 * 8 = 0
         var attackerBody = [WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,RANGED_ATTACK];
     
         if (harvesters.length < hervesterlimit && spawn.canCreateCreep(harvesterBody, undefined) == OK) {
@@ -57,19 +55,15 @@ var processSpawning = {
             console.log('Spawning new carrier: ' + newName);
         }
         else if (builders.length < builderLimit && spawn.canCreateCreep(builderBody, undefined) == OK) {
-            var newName = spawn.createCreep(builderBody, undefined, {role: 'builder', building: false, repairing: false});
+            var newName = spawn.createCreep(builderBody, undefined, {role: 'builder', building: false});
             console.log('Spawning new builder: ' + newName);
         }
         else if (upgraders.length < upgraderLimit && spawn.canCreateCreep(upgraderBody, undefined) == OK) {
             var newName = spawn.createCreep(upgraderBody, undefined, {role: 'upgrader', upgrading: false});
             console.log('Spawning new upgrader: ' + newName);
         }
-        else if (repairers.length < repairerLimit && spawn.canCreateCreep(repairerBody, undefined) == OK) {
-            var newName = spawn.createCreep(repairerBody, undefined, {role: 'repairer', repairing: false});
-            console.log('Spawning new repairer: ' + newName);
-        }
         else if (attackers.length < attackerLimit && spawn.canCreateCreep(attackerBody, undefined) == OK) {
-            var newName = spawn.createCreep(attackerBody, undefined, {role: 'attacker', repairing: false});
+            var newName = spawn.createCreep(attackerBody, undefined, {role: 'attacker'});
             console.log('Spawning new attacker: ' + newName);
         }
 
