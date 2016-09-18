@@ -7,6 +7,8 @@ var roleCarrier = {
             creep.memory.harvesting = false;
         }
 
+        console.log(getTowerVolumes());
+
         if (creep.memory.harvesting) {
             var targets = creep.pos.findInRange(FIND_DROPPED_ENERGY, 3, { filter: (x) => x.resourceType == RESOURCE_ENERGY });
             if (targets.length > 0) {
@@ -42,10 +44,13 @@ var roleCarrier = {
 
         function getTowerVolumes() {
             var towers = Game.rooms['W59S26'].find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
+            //for (var towername in towers) {
+            //    var tower = towers[towername];
 
-            for (var towerCounter = 0; towerCounter < towers.length; towerCounter++) {
-                processTowers.run(towers[towerCounter]);
-            }
+            //}
+            var iets = towers.sort(function (a, b) {
+                return parseInt(a.energy) - parseInt(b.energy);
+            });
         }
     }
 };
