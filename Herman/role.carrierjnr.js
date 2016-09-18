@@ -20,7 +20,11 @@ var roleCarrierJnr = {
             }
         }
         else {
-            var target = Game.spawns.Spawn1.room.lookForAt('structure', 34, 24)[0];
+            var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return structure.structureType == STRUCTURE_STORAGE;
+                }
+            });
             if (target) {
                 if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
