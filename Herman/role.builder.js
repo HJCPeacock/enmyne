@@ -25,12 +25,8 @@ var roleBuilder = {
 	    else {
 	        var targets = creep.pos.findInRange(FIND_DROPPED_ENERGY, 3, { filter: (x) => x.resourceType == RESOURCE_ENERGY });
 	        if (targets.length > 0) {
-	            var res = creep.pickup(targets[0]);
-	            if (res == ERR_NOT_IN_RANGE) {
+	            if (creep.pickup(targets[0]) == ERR_NOT_IN_RANGE) {
 	                creep.moveTo(targets[0]);
-	            } else if (res == OK)
-	            {
-	                console.log('builder found ' + targets[0].energy + ' energy');
 	            }
 	        }
             else {
