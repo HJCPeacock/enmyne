@@ -23,14 +23,22 @@ var roleBuilder = {
             }
 	    }
 	    else {
-	        var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-	            filter: (structure) => {
-	                return structure.structureType == STRUCTURE_STORAGE;
+	        var targets = creep.pos.findInRange(FIND_DROPPED_ENERGY, 3);
+	        if (targets.length > 0) {
+	            if (creep.pickup(targets[0]) == ERR_NOT_IN_RANGE) {
+	                creep.moveTo(targets[0]);
 	            }
-	        });
-	        if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source);
-            }
+	        }
+            else {
+	            var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+	                filter: (structure) => {
+	                    return structure.structureType == STRUCTURE_STORAGE;
+	                }
+	            });
+	            if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(source);
+	            }
+	        }
 	    }
 	}
 };
