@@ -4,8 +4,11 @@ var roleCarrierJnr = {
         if (creep.carry.energy == 0) {
             var targets = creep.pos.findInRange(FIND_DROPPED_ENERGY, 3, { filter: (x) => x.resourceType == RESOURCE_ENERGY });
             if (targets.length > 0) {
-                if (creep.pickup(targets[0]) == ERR_NOT_IN_RANGE) {
+                var res = creep.pickup(targets[0]);
+                if (res == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0]);
+                } else if (res == OK) {
+                    console.log('found ' + targets[0].energy + 'energy');
                 }
             }
             else {
