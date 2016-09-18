@@ -10,9 +10,9 @@ var processLinks = {
             linkFrom1.transferEnergy(linkTo);
 
         //at source 2
-        var linkFrom2 = Game.spawns.Spawn1.room.lookForAt('structure', 22, 42)[0];
+        var linkFrom2 = Game.spawns.Spawn1.room.lookForAt('structure', 22, 42)[1];
 
-        if (linkFrom2.cooldown == 0 && linkTo.energyCapacity - linkTo.energy > linkFrom2.energy && linkFrom2.energy > 200)
+        if (linkFrom2.cooldown == 0 && linkTo.energyCapacity - linkTo.energy >= linkFrom2.energy && linkFrom2.energy > 200)
             linkFrom2.transferEnergy(linkTo);
     }
 };
