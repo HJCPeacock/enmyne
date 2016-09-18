@@ -19,7 +19,7 @@ var roleUpgrader = {
 	                return structure.structureType == STRUCTURE_STORAGE;
 	            }
 	        });
-            if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+	        if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source);
             }
         }
