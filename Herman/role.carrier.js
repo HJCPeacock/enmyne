@@ -7,8 +7,6 @@ var roleCarrier = {
             creep.memory.harvesting = false;
         }
 
-        console.log(getTowerVolumes());
-
         if (creep.memory.harvesting) {
             var targets = creep.pos.findInRange(FIND_DROPPED_ENERGY, 3, { filter: (x) => x.resourceType == RESOURCE_ENERGY });
             if (targets.length > 0) {
@@ -26,31 +24,45 @@ var roleCarrier = {
             }
         }
         else {
-            var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_EXTENSION ||
-                                structure.structureType == STRUCTURE_SPAWN ||
-                                structure.structureType == STRUCTURE_TOWER ||
-                                structure.structureType == STRUCTURE_STORAGE) && structure.energy < structure.energyCapacity;
-                }
-            });
-            if (target) {
-                if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
+            var lowesttower = getTowerVolumes();
+            if (lowesttower < 500) {
+                var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return structure.structureType == STRUCTURE_TOWER && structure.energy == lowesttower;
+                    }
+                });
+                if (target) {
+                    if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(target);
+                    }
                 }
             }
-            else creep.memory.harvesting = true;
+            else {
+                var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType == STRUCTURE_EXTENSION ||
+                                    structure.structureType == STRUCTURE_SPAWN ||
+                                    structure.structureType == STRUCTURE_TOWER ||
+                                    structure.structureType == STRUCTURE_STORAGE) && structure.energy < structure.energyCapacity;
+                    }
+                });
+                if (target) {
+                    if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(target);
+                    }
+                }
+                else creep.memory.harvesting = true;
+            }
         }
 
         function getTowerVolumes() {
+            var lowest = 1000;
             var towers = Game.rooms['W59S26'].find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
-            //for (var towername in towers) {
-            //    var tower = towers[towername];
-
-            //}
-            var iets = towers.sort(function (a, b) {
-                return parseInt(a.energy) - parseInt(b.energy);
-            });
+            for (var towername in towers) {
+                var tower = towers[towername];
+                if (tower.energy <= lowest) lowest = tower.energy;
+            }
+            return lowest;
         }
     }
 };
