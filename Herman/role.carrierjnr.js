@@ -8,7 +8,7 @@ var roleCarrierJnr = {
                 if (res == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0]);
                 } else if (res == OK) {
-                    console.log('found ' + targets[0].energy + 'energy');
+                    console.log('carrierjnr found ' + targets[0].energy + ' energy');
                 }
             }
             else {

@@ -30,7 +30,7 @@ var roleBuilder = {
 	                creep.moveTo(targets[0]);
 	            } else if (res == OK)
 	            {
-	                console.log('found ' + targets[0].energy + 'energy');
+	                console.log('builder found ' + targets[0].energy + ' energy');
 	            }
 	        }
             else {
