@@ -1,13 +1,7 @@
 var roleCarrierJnr = {
     run: function (creep) {
-        if (!creep.memory.harvesting && creep.carry.energy == 0) {
-            creep.memory.harvesting = true;
-        }
-        if (creep.memory.harvesting && creep.carry.energy == creep.carryCapacity) {
-            creep.memory.harvesting = false;
-        }
-
-        if (creep.memory.harvesting) {
+       
+        if (creep.carry.energy < creep.carryCapacity) {
             var targets = creep.pos.findInRange(FIND_DROPPED_ENERGY, 3);
             if (targets.length > 0) {
                 if (creep.pickup(targets[0]) == ERR_NOT_IN_RANGE) {
@@ -30,7 +24,6 @@ var roleCarrierJnr = {
                     creep.moveTo(target);
                 }
             }
-            else creep.memory.harvesting = true;
         }
     }
 };

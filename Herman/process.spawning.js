@@ -49,7 +49,7 @@ var processSpawning = {
             console.log('Spawning new harvester: ' + newName);
         }
         else if (carrierJnrs.length < 1 && spawn.canCreateCreep(carrierJnrBody, undefined) == OK) {
-            var newName = spawn.createCreep(carrierJnrBody, undefined, { role: 'carrierjnr', harvesting: true });
+            var newName = spawn.createCreep(carrierJnrBody, undefined, { role: 'carrierjnr' });
             console.log('Spawning new carrierjnr: ' + newName);
         }
         else if (carriers.length < carrierLimit && spawn.canCreateCreep(carrierBody, undefined) == OK) {
