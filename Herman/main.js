@@ -15,6 +15,9 @@ module.exports.loop = function () {
     processLinks.run();
 
     //For room W59S26
+    //set min repair value
+    console.log(getLowestWall());
+
     //params: builders, harvesters, upgraders, repairers, attackers, carriers
     processSpawning.run(1, Game.rooms['W59S26'].find(FIND_SOURCES).length, calculateUpgraderCount(), 0, 1);
    
@@ -49,10 +52,20 @@ module.exports.loop = function () {
     var towers = Game.rooms['W59S26'].find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
     for(var towerCounter = 0; towerCounter < towers.length; towerCounter++)
     {
-        processTowers.run(towers[towerCounter]);
+        processTowers.run(towers[towerCounter], 200000, 4000);
     }
 
     function calculateUpgraderCount() {
         return Math.ceil(Game.rooms['W59S26'].storage.store[RESOURCE_ENERGY] / 10000);
+    }
+
+    function getLowestWall() {
+        var lowest = 10000000;
+        var walls = Game.rooms['W59S26'].find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_WALL });
+        for (var wallname in walls) {
+            var wall = walls[wallname];
+            if (wall.hits <= lowest) lowest = wall.hits;
+        }
+        return lowest;
     }
 }

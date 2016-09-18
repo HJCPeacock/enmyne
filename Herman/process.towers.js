@@ -1,5 +1,5 @@
 var processTowers = {
-    run: function(tower) {
+    run: function(tower, wallLimit, rampartLimit) {
         if(tower) {
             var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
             
@@ -9,10 +9,10 @@ var processTowers = {
             
             var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return ((structure.structureType == STRUCTURE_WALL && structure.hits < 200000) ||
+                    return ((structure.structureType == STRUCTURE_WALL && structure.hits < wallLimit) ||
                                 (structure.structureType == STRUCTURE_SPAWN && structure.hits < structure.hitsMax) ||
                                 (structure.structureType == STRUCTURE_TOWER && structure.hits < structure.hitsMax) ||
-                                (structure.structureType == STRUCTURE_RAMPART && structure.hits < 4000) ||
+                                (structure.structureType == STRUCTURE_RAMPART && structure.hits < rampartLimit) ||
                                 (structure.structureType == STRUCTURE_ROAD && structure.hits < structure.hitsMax)
                                 );
                 }
