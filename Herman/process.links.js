@@ -1,4 +1,4 @@
-﻿var processLinks = {
+var processLinks = {
     run: function () {
 
         //room W59S26
