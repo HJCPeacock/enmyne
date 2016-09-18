@@ -16,7 +16,10 @@ module.exports.loop = function () {
 
     //For room W59S26
     //set min repair value
-    console.log(getLowestWall());
+    var wallLimit = getLowestWall();
+    var rampartLimit = getLowestRampart();
+    if (Memory.wallLimit < wallLimit) Memory.wallLimit = wallLimit;
+    if (Memory.rampartLimit < rampartLimit) Memory.rampartLimit = rampartLimit;
 
     //params: builders, harvesters, upgraders, repairers, attackers, carriers
     processSpawning.run(1, Game.rooms['W59S26'].find(FIND_SOURCES).length, calculateUpgraderCount(), 0, 1);
@@ -52,7 +55,7 @@ module.exports.loop = function () {
     var towers = Game.rooms['W59S26'].find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
     for(var towerCounter = 0; towerCounter < towers.length; towerCounter++)
     {
-        processTowers.run(towers[towerCounter], 200000, 4000);
+        processTowers.run(towers[towerCounter], Memory.wallLimit, Memory.rampartLimit);
     }
 
     function calculateUpgraderCount() {
@@ -61,10 +64,20 @@ module.exports.loop = function () {
 
     function getLowestWall() {
         var lowest = 10000000;
-        var walls = Game.rooms['W59S26'].find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_WALL });
+        var walls = Game.rooms['W59S26'].find(FIND_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_WALL });
         for (var wallname in walls) {
             var wall = walls[wallname];
             if (wall.hits <= lowest) lowest = wall.hits;
+        }
+        return lowest;
+    }
+
+    function getLowestRampart() {
+        var lowest = 10000000;
+        var ramparts = Game.rooms['W59S26'].find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_RAMPART });
+        for (var rampartname in ramparts) {
+            var rampart = ramparts[rampartname];
+            if (rampart.hits <= lowest) lowest = rampart.hits;
         }
         return lowest;
     }
