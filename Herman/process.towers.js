@@ -27,6 +27,16 @@ var processTowers = {
             else if(closestDamagedStructure) {
                 tower.repair(closestDamagedStructure);
             }
+
+            closestwWall(closestDamagedStructure);
+            function closestwWall(structure) {
+                if (structure.structureType == STRUCTURE_WALL && Memory.rapairWalls[structure.id]) {
+
+                }
+                else if (structure.structureType == STRUCTURE_WALL && Memory.rapairWalls[structure.id] == undefined) {
+                    Memory.rapairWalls.push(structure)
+                }
+            }
         }
 	}
 };
