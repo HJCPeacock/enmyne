@@ -28,20 +28,11 @@ var processTowers = {
 
             function closestwWallRmpart(structure) {
                 if (structure.structureType == STRUCTURE_WALL || structure.structureType == STRUCTURE_RAMPART) {
-                    //Walls
-                    if (Memory.repairWalls[structure.id]) {
-                        if (Memory.repairWalls[structure.id].hp < structure.hits) Memory.repairWalls[structure.id].hp = structure.hits
+                    if (Memory.repairHP[structure.id]) {
+                        if (Memory.repairHP[structure.id].hp < structure.hits) Memory.repairHP[structure.id].hp = structure.hits
                         else return structure;
                     } else {
-                        Memory.repairWalls[structure.id] = { hp: structure.hits };
-                    }
-
-                    //Ramparts
-                    if (Memory.repairRamparts[structure.id]) {
-                        if (Memory.repairRamparts[structure.id].hp < structure.hits) Memory.repairRamparts[structure.id].hp = structure.hits
-                        else return structure;
-                    } else {
-                        Memory.repairRamparts[structure.id] = { hp: structure.hits };
+                        Memory.repairHP[structure.id] = { hp: structure.hits };
                     }
                 }
             }
