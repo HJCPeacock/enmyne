@@ -2,12 +2,12 @@ var roleRepair = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        var ramparts = creep.room.find(FIND_STRUCTURES, {
+        var ramparts = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_RAMPART && structure.hits < 200000);
             }
         });
-	    var targets = creep.room.find(FIND_STRUCTURES, {
+        var targets = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return ((structure.structureType == STRUCTURE_SPAWN && structure.hits < structure.hitsMax) ||
                             (structure.structureType == STRUCTURE_TOWER && structure.hits < structure.hitsMax) ||
