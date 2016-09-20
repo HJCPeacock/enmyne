@@ -37,6 +37,17 @@ var processTowers = {
             //        Memory.rapairWalls.push(structure)
             //    }
             //}
+
+            //Add objects to memory
+            //var walls = Game.rooms['W59S26'].find(FIND_STRUCTURES, {
+            //    filter: (structure) => {
+            //        return structure.structureType == STRUCTURE_RAMPART;
+            //    }
+            //});
+            //for (var obj in walls) {
+            //    var wall = walls[obj];
+            //    //Memory.repairRamparts[wall.id] = {hp: wall.hits};
+            //}
         }
 	}
 };
