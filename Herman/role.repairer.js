@@ -2,12 +2,12 @@ var roleRepair = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        var ramparts = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+        var rampart = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_RAMPART && structure.hits < 200000);
             }
         });
-        var targets = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+        var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return ((structure.structureType == STRUCTURE_SPAWN && structure.hits < structure.hitsMax) ||
                             (structure.structureType == STRUCTURE_TOWER && structure.hits < structure.hitsMax) ||
@@ -17,15 +17,15 @@ var roleRepair = {
                             );
                 }
 	    });
-	    if (ramparts.length > 0)
+	    if (rampart)
 	    {
-	        if (creep.repair(ramparts[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-	            creep.moveTo(ramparts[0]);
+	        if (creep.repair(rampart, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+	            creep.moveTo(rampart);
 	        }
 	    }
-        else if(targets.length > 0) {
-            if(creep.repair(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(targets[0]);
+        else if(target) {
+            if(creep.repair(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(target);
             }
         }
 	}
