@@ -51,7 +51,7 @@ module.exports.loop = function () {
     var towers = Game.rooms['W59S26'].find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
     for(var towerCounter = 0; towerCounter < towers.length; towerCounter++)
     {
-        processTowers.run(towers[towerCounter], 200000, 4000);
+        processTowers.run(towers[towerCounter]);
     }
 
     function calculateUpgraderCount() {

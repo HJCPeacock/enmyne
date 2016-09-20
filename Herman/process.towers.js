@@ -1,5 +1,5 @@
 var processTowers = {
-    run: function(tower, wallLimit, rampartLimit) {
+    run: function(tower) {
         if(tower) {
             var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
             
@@ -9,10 +9,8 @@ var processTowers = {
             
             var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return ((structure.structureType == STRUCTURE_WALL && structure.hits < wallLimit) ||
-                                (structure.structureType == STRUCTURE_SPAWN && structure.hits < structure.hitsMax) ||
+                    return (closestwWallRmpart || (structure.structureType == STRUCTURE_SPAWN && structure.hits < structure.hitsMax) ||
                                 (structure.structureType == STRUCTURE_TOWER && structure.hits < structure.hitsMax) ||
-                                (structure.structureType == STRUCTURE_RAMPART && structure.hits < rampartLimit) ||
                                 (structure.structureType == STRUCTURE_ROAD && structure.hits < structure.hitsMax)
                                 );
                 }
@@ -28,15 +26,25 @@ var processTowers = {
                 tower.repair(closestDamagedStructure);
             }
 
-            //closestwWall(closestDamagedStructure);
-            //function closestwWall(structure) {
-            //    if (structure.structureType == STRUCTURE_WALL && Memory.rapairWalls[structure.id]) {
+            function closestwWallRmpart(structure) {
+                if (structure.structureType == STRUCTURE_WALL || structure.structureType == STRUCTURE_RAMPART) {
+                    //Walls
+                    if (Memory.repairWalls[structure.id]) {
+                        if (Memory.repairWalls[structure.id].hp < structure.hits) Memory.repairWalls[structure.id].hp = structure.hits
+                        else return structure;
+                    } else {
+                        Memory.repairWalls[structure.id] = { hp: structure.hits };
+                    }
 
-            //    }
-            //    else if (structure.structureType == STRUCTURE_WALL && Memory.rapairWalls[structure.id] == undefined) {
-            //        Memory.rapairWalls.push(structure)
-            //    }
-            //}
+                    //Ramparts
+                    if (Memory.repairRamparts[structure.id]) {
+                        if (Memory.repairRamparts[structure.id].hp < structure.hits) Memory.repairRamparts[structure.id].hp = structure.hits
+                        else return structure;
+                    } else {
+                        Memory.repairRamparts[structure.id] = { hp: structure.hits };
+                    }
+                }
+            }
 
             //Add objects to memory
             //var walls = Game.rooms['W59S26'].find(FIND_STRUCTURES, {
