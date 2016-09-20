@@ -37,7 +37,7 @@ var processSpawning = {
         //M = number of MOVE parts
         var harvesterBody = [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]; //1200 | 0.5 * 10 / 5 = 1  | 8 * 1 - 2 * 4 = 8 - 8 = 0
         var carrierJnrBody = [CARRY, MOVE]; //250 | | 4 * 2 - 2 * 3 = 2
-        var carrierBody = [CARRY, CARRY, MOVE, CARRY, CARRY, MOVE];//[CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; //550 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
+        var carrierBody = Game.rooms['W59S26'].find(FIND_MY_CREEPS).length < 4 ? [CARRY, CARRY, MOVE, CARRY, CARRY, MOVE] : [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; //550 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
         var builderBody = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//950 | 1 * 8 / 8 = 1 | 8 * 2 - 2 * 8 = 0
         var upgraderBody = [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]; //950 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
         var attackerBody = [MOVE, MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, HEAL];

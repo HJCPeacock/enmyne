@@ -15,6 +15,8 @@ module.exports.loop = function () {
     processLinks.run();
 
     //For room W59S26
+    if (Game.rooms['W59S26'].find(FIND_MY_CREEPS).length < 4) Game.notify('O balls; screep count = ' + Game.rooms['W59S26'].find(FIND_MY_CREEPS).length);
+
     //params: builders, harvesters, upgraders, repairers, attackers, carriers
     processSpawning.run(1, Game.rooms['W59S26'].find(FIND_SOURCES).length, calculateUpgraderCount(), 0, 1);
    
