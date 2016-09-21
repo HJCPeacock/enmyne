@@ -18,7 +18,7 @@ module.exports.loop = function () {
     if (Game.rooms['W59S26'].find(FIND_MY_CREEPS).length < 4) Game.notify('O balls; screep count in room W59S26 = ' + Game.rooms['W59S26'].find(FIND_MY_CREEPS).length);
 
     //params: builders, harvesters, upgraders, repairers, attackers, carriers
-    processSpawning.run(1, Game.rooms['W59S26'].find(FIND_SOURCES).length, calculateUpgraderCount(), 0, 1);
+    processSpawning.run(1, Game.rooms['W59S26'].find(FIND_SOURCES).length, calculateUpgraderCount(), calculateAttackerCount(), 1);
    
     //run roles for room W59S26
     var myScreeps = Game.rooms['W59S26'].find(FIND_MY_CREEPS)
@@ -57,5 +57,9 @@ module.exports.loop = function () {
     function calculateUpgraderCount() {
         if (!Game.rooms['W59S26'].storage) return 1;
         return Math.ceil(Game.rooms['W59S26'].storage.store[RESOURCE_ENERGY] / 10000);
+    }
+
+    function calculateAttackerCount() {
+        if (Game.rooms['W59S26'].find(FIND_HOSTILE_CREEPS).length > 1) return 4;
     }
 }
