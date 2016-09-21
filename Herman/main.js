@@ -19,7 +19,7 @@ module.exports.loop = function () {
 
     //params: builders, harvesters, upgraders, repairers, attackers, carriers
     processSpawning.run(1, Game.rooms['W59S26'].find(FIND_SOURCES).length, calculateUpgraderCount(), 0, 1);
-   
+   //t
     //run roles for room W59S26
     var myScreeps = Game.rooms['W59S26'].find(FIND_MY_CREEPS)
     for (var name in myScreeps) {
