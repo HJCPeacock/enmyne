@@ -37,7 +37,7 @@ var processSpawning = {
         //W = creep weight (Number of body parts, excluding MOVE and empty CARRY parts)
         //K = terrain factor (1x for road, 2x for plain, 10x for swamp)
         //M = number of MOVE parts
-        var harvesterBody = [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]; //1200 | 0.5 * 10 / 5 = 1  | 8 * 1 - 2 * 4 = 8 - 8 = 0
+        var harvesterBody = harvesters.length == 0 ? [WORK, WORK, CARRY, MOVE] : [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]; //1200 | 0.5 * 10 / 5 = 1  | 8 * 1 - 2 * 4 = 8 - 8 = 0
         var carrierJnrBody = [CARRY, MOVE]; //250 | | 4 * 2 - 2 * 3 = 2
         var carrierBody = Game.rooms['W59S26'].find(FIND_MY_CREEPS).length < 4 ? [CARRY, CARRY, MOVE, CARRY, CARRY, MOVE] : [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; //550 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
         var builderBody = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//950 | 1 * 8 / 8 = 1 | 8 * 2 - 2 * 8 = 0
