@@ -19,7 +19,7 @@ module.exports.loop = function () {
 
     //params: builders, harvesters, upgraders, repairers, attackers, carriers
     processSpawning.run(1, Game.rooms['W59S26'].find(FIND_SOURCES).length, calculateUpgraderCount(), 0, 1);
-   //t
+   
     //run roles for room W59S26
     var myScreeps = Game.rooms['W59S26'].find(FIND_MY_CREEPS)
     for (var name in myScreeps) {
@@ -55,6 +55,7 @@ module.exports.loop = function () {
     }
 
     function calculateUpgraderCount() {
+        if (!Game.rooms['W59S26'].storage) return 1;
         return Math.ceil(Game.rooms['W59S26'].storage.store[RESOURCE_ENERGY] / 10000);
     }
 }

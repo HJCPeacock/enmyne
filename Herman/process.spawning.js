@@ -10,6 +10,8 @@ var processSpawning = {
             }
         }
     
+        if (!spawn) return;
+
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
