@@ -1,7 +1,7 @@
 var processLinks = {
     run: function () {
 
-        //room W59S26
+        //room E51N1
         if (!Game.spawns.Spawn1) return;
         //at source 1
         var linkFrom1 = Game.spawns.Spawn1.room.lookForAt('structure', 20, 33)[0];

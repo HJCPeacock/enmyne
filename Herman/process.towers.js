@@ -38,7 +38,7 @@ var processTowers = {
             }
 
             //Add objects to memory
-            //var walls = Game.rooms['W59S26'].find(FIND_STRUCTURES, {
+            //var walls = Game.rooms['E51N1'].find(FIND_STRUCTURES, {
             //    filter: (structure) => {
             //        return structure.structureType == STRUCTURE_RAMPART;
             //    }
