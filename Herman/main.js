@@ -17,8 +17,8 @@ module.exports.loop = function () {
     //For room E51N1
     //if (Game.rooms['E51N1'].find(FIND_MY_CREEPS).length < 4) Game.notify('O balls; screep count in room E51N1 = ' + Game.rooms['E51N1'].find(FIND_MY_CREEPS).length);
 
-    //params: builders, harvesters, upgraders, repairers, attackers, carriers
-    processSpawning.run(1, Game.rooms['E51N1'].find(FIND_SOURCES).length, calculateUpgraderCount(), calculateAttackerCount(), 1);
+    //params: builders, harvesters, upgraders, attackers, carriers
+    processSpawning.run(1, Game.rooms['E51N1'].find(FIND_SOURCES).length, calculateUpgraderCount(), calculateAttackerCount(), 0);
    
     //run roles for room E51N1
     var myScreeps = Game.rooms['E51N1'].find(FIND_MY_CREEPS)
