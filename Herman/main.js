@@ -63,6 +63,6 @@ module.exports.loop = function () {
     }
 
     function calculateAttackerCount() {
-        if (Game.rooms['E51N1'].find(FIND_HOSTILE_CREEPS).length > 1) return 4;
+        if (Game.rooms['E51N1'].find(FIND_HOSTILE_CREEPS).length > 1) return 3;
     }
 }
