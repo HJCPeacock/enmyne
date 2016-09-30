@@ -12,10 +12,10 @@ var rolePath = {
         }
         else {
            
-            if (creep.memory.role == 'upgrader') {
+            if (creep.memory.upgrading != undefined) {
                 roleUpgrader.run(creep);
             }
-            if (creep.memory.role == 'builder') {
+            if (creep.memory.building != undefined) {
                 roleBuilder.run(creep);
             }
         }
