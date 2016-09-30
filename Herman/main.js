@@ -8,6 +8,7 @@ var roleAttacker = require('role.attack');
 var processSpawning = require('process.spawning');
 var processTowers = require('process.towers');
 var processLinks = require('process.links');
+var rolePath = require('role.claim');
 
 module.exports.loop = function () {
 
@@ -18,10 +19,10 @@ module.exports.loop = function () {
     //if (Game.rooms['E51N1'].find(FIND_MY_CREEPS).length < 4) Game.notify('O balls; screep count in room E51N1 = ' + Game.rooms['E51N1'].find(FIND_MY_CREEPS).length);
 
     //params: builders, harvesters, upgraders, attackers, carriers
-    processSpawning.run(1, Game.rooms['E51N1'].find(FIND_SOURCES).length, calculateUpgraderCount(), calculateAttackerCount(), 0);
-   
+    processSpawning.run(2, Game.rooms['E51N1'].find(FIND_SOURCES).length, calculateUpgraderCount(), calculateAttackerCount(), 0);
+
     //run roles for room E51N1
-    var myScreeps = Game.rooms['E51N1'].find(FIND_MY_CREEPS)
+    var myScreeps = Game.creeps;
     for (var name in myScreeps) {
         var creep = myScreeps[name];
         if (creep.memory.role == 'harvester') {
@@ -33,24 +34,26 @@ module.exports.loop = function () {
         if (creep.memory.role == 'carrier') {
             roleCarrier.run(creep);
         }
-        if(creep.memory.role == 'upgrader') {
+        if (creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);
         }
-        if(creep.memory.role == 'builder') {
+        if (creep.memory.role == 'builder') {
             roleBuilder.run(creep);
         }
-        if(creep.memory.role == 'repairer') {
+        if (creep.memory.role == 'repairer') {
             roleRepairer.run(creep);
         }
-        if(creep.memory.role == 'attacker') {
+        if (creep.memory.role == 'attacker') {
             roleAttacker.run(creep);
         }
+        if (creep.memory.role == 'claim') {
+            rolePath.run(creep);
+        }
     }
-    
+
     //run towers for room E51N1
     var towers = Game.rooms['E51N1'].find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
-    for(var towerCounter = 0; towerCounter < towers.length; towerCounter++)
-    {
+    for (var towerCounter = 0; towerCounter < towers.length; towerCounter++) {
         processTowers.run(towers[towerCounter]);
     }
 
