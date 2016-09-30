@@ -30,7 +30,7 @@ var processTowers = {
                 if (structure.structureType == STRUCTURE_WALL || structure.structureType == STRUCTURE_RAMPART) {
                     if (Memory.repairHP[structure.id]) {
                         if (Memory.repairHP[structure.id].hp < structure.hits) Memory.repairHP[structure.id].hp = structure.hits;
-                        else if (structure.hits < 2000 || structure.hits < Memory.repairHP[structure.id].hp) return true;
+                        else if (structure.hits < 2000 || structure.hits < Memory.repairHP[structure.id].hp - 1000) return true;
                     } else {
                         Memory.repairHP[structure.id] = { hp: structure.hits };
                     }

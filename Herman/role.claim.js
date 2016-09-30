@@ -1,4 +1,4 @@
-﻿var rolePath = {
+var rolePath = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
