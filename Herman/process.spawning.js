@@ -23,6 +23,7 @@ var processSpawning = {
         //console.log('Harvesters: ' + harvesters.length)
         //console.log('Upgraders: ' + upgraders.length)
         //console.log('Total: ' + Game.rooms['E51N1'].find(FIND_MY_CREEPS).length)
+
         //Body Parts
         //time
         //t = ceil(k * W / M)

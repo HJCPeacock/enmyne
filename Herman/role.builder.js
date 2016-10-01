@@ -32,7 +32,7 @@ var roleBuilder = {
             else {
 	            var sourceStorage = creep.pos.findClosestByRange(FIND_STRUCTURES, {
 	                filter: (structure) => {
-	                    return structure.structureType == STRUCTURE_STORAGE;
+	                    return structure.structureType == STRUCTURE_STORAGE && structure.energy > 2000;
 	                }
 	            });
 	            if (sourceStorage) {

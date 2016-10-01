@@ -58,7 +58,7 @@ module.exports.loop = function () {
     }
 
     function calculateUpgraderCount() {
-        if (!Game.rooms['E51N1'].storage) return 3;
+        if (!Game.rooms['E51N1'].storage) return 2;
         return Math.ceil(Game.rooms['E51N1'].storage.store[RESOURCE_ENERGY] / 10000);
     }
 
