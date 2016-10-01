@@ -14,6 +14,14 @@ var processSpawning = {
             }
         });
 
+        var hasLinks = room.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+                return structure.structureType == STRUCTURE_LINK;
+            }
+        }) > 2;
+
+        var hasStorage = !(room.storage == undefined);
+
         for (var name in spawns)
         {
             var spawn = spawns[name];
@@ -54,7 +62,7 @@ var processSpawning = {
             var carrierJnrBody = [CARRY, MOVE];
             var carrierBody = buildCarrierBody();
             var builderBody = buildBuilderBody();
-            var upgraderBody = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//[WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]; //950 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
+            var upgraderBody = buildUpgraderBody();
             var attackerBody = [MOVE, MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, HEAL];
 
             if (harvesters.length < hervesterlimit && spawn.canCreateCreep(harvesterBody, undefined) == OK) {
@@ -96,9 +104,9 @@ var processSpawning = {
                 return [WORK, WORK, CARRY, CARRY, MOVE, MOVE];//4 - 4 = 0
             if (room.energyCapacityAvailable <= 600)
                 return [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
-            if (room.energyCapacityAvailable <= 800)
+            if (room.energyCapacityAvailable <= 800 || room.energyCapacityAvailable >= 800 && (!hasLinks || !hasStorage))
                 return [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
-            if (room.energyCapacityAvailable >= 850)
+            if (room.energyCapacityAvailable >= 850 && hasLinks && hasStorage)
                 return [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
         }
 
@@ -132,6 +140,25 @@ var processSpawning = {
                 return [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//16 - 16 = 0
             if (room.energyCapacityAvailable >= 1250)
                 return [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//20 - 20 = 0
+        }
+
+        function buildUpgraderBody()
+        {
+            //based on roads
+            if (room.energyCapacityAvailable <= 300)
+                return [WORK, CARRY, CARRY, MOVE, MOVE];//3 - 4 = -1
+            if (room.energyCapacityAvailable <= 400)
+                return [WORK, WORK, CARRY, CARRY, MOVE, MOVE];//4 - 4 = 0
+            if (room.energyCapacityAvailable <= 600)
+                return [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
+            if (room.energyCapacityAvailable <= 800 || room.energyCapacityAvailable >= 800 && (!hasLinks || !hasStorage))
+                return [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
+            if (room.energyCapacityAvailable <= 850 && hasLinks && hasStorage)
+                return [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
+            if (room.energyCapacityAvailable <= 1100 && hasLinks && hasStorage)
+                return [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
+            if (room.energyCapacityAvailable >= 1350 && hasLinks && hasStorage)
+                return [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];//10 - 10 = 0
         }
     }
 };
