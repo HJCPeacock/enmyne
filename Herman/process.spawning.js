@@ -36,7 +36,7 @@ var processSpawning = {
         var builderBody = buildBuilderBody();
         var upgraderBody = buildUpgraderBody();
         var attackerBody = buildAttackerBody();
-        var minerBody = [WORK ,WORK, WORK, WORK, CARRY, CARRY];
+        var minerBody = [WORK ,WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE];
 
         for (var name in spawns)
         {
@@ -83,6 +83,13 @@ var processSpawning = {
                 if (spawn.canCreateCreep(attackerBody, undefined) == OK)
                 {
                     var newName = spawn.createCreep(attackerBody, undefined, { role: 'attacker' });
+                    console.log('Spawning new attacker: ' + newName);
+                }
+                return;
+            }
+            else if (miners.length < 0 && room.name == 'E51N1') {
+                if (spawn.canCreateCreep(minerBody, undefined) == OK) {
+                    var newName = spawn.createCreep(minerBody, undefined, { role: 'miner', mining:false });
                     console.log('Spawning new attacker: ' + newName);
                 }
                 return;
