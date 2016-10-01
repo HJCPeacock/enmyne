@@ -1,5 +1,5 @@
 var processSpawning = {
-    run: function (builderLimit, hervesterlimit, upgraderLimit, attackerLimit, carrierLimit) {
+    run: function (builderLimit, hervesterlimit, upgraderLimit, attackerLimit, carrierLimit, carrierJnrLimit) {
 
         var spawn = Game.spawns['Spawn1'];
 
@@ -53,7 +53,7 @@ var processSpawning = {
             var newName = spawn.createCreep(harvesterBody, undefined, { role: 'harvester', harvesting: true, source: getSourceCount() == 0 ? 0 : 1 });
             console.log('Spawning new harvester: ' + newName);
         }
-        else if (carrierJnrs.length < 0 && spawn.canCreateCreep(carrierJnrBody, undefined) == OK) {
+        else if (carrierJnrs.length < carrierJnrLimit && spawn.canCreateCreep(carrierJnrBody, undefined) == OK) {
             var newName = spawn.createCreep(carrierJnrBody, undefined, { role: 'carrierjnr' });
             console.log('Spawning new carrierjnr: ' + newName);
         }

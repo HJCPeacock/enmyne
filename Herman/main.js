@@ -24,8 +24,8 @@ module.exports.loop = function () {
         //if (room.find(FIND_MY_CREEPS).length < 4) Game.notify('O balls; screep count in room ' + room.name + ' = ' + room.find(FIND_MY_CREEPS).length);
 
         //spawning
-        //params: builders, harvesters, upgraders, attackers, carriers
-        processSpawning.run(2, room.find(FIND_SOURCES).length, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room));
+        //params: builders, harvesters, upgraders, attackers, carriers, carriersjnr
+        processSpawning.run(2, room.find(FIND_SOURCES).length, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
 
         var myScreeps = room.find(FIND_MY_CREEPS);
         for (var name in myScreeps) {
@@ -74,6 +74,19 @@ module.exports.loop = function () {
 
     function calculateCarrierCount(room) {
         if (!room.storage) return 0;
-        else if (room.storage.store[RESOURCE_ENERGY] > 1000) return 1;
+        else if (room.storage.store[RESOURCE_ENERGY] > 1000 && room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+	                return structure.structureType == STRUCTURE_LINK;
+        }
+        }).length > 2) return 1;
+    }
+
+    function calculateCarrierJnrCount(room) {
+        if (!room.storage || room.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+	                return structure.structureType == STRUCTURE_LINK;
+        }
+        }).length < 3) return 0;
+        return 1;
     }
 }
