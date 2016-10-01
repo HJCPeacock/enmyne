@@ -23,6 +23,8 @@ module.exports.loop = function () {
 
     //processLinks.run();
 
+    //Unclaimed Rooms
+
     var myRooms = Game.rooms
     for (var name in myRooms )
     {
@@ -36,8 +38,8 @@ module.exports.loop = function () {
         processSpawning.run(room, calculateBuilderCount(room), room.find(FIND_SOURCES).length, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
 
         var myScreeps = room.find(FIND_MY_CREEPS);
-        for (var name in myScreeps) {
-            var creep = myScreeps[name];
+        for (var screepname in myScreeps) {
+            var creep = myScreeps[screepname];
             if (creep.memory.role == 'harvester') {
                 roleHarvester.run(creep);
             }
