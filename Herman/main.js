@@ -9,6 +9,7 @@ var processSpawning = require('process.spawning');
 var processTowers = require('process.towers');
 var processLinks = require('process.links');
 var rolePath = require('role.claim');
+var roleMining = require('role.mining');
 
 module.exports.loop = function () {
 
@@ -22,8 +23,6 @@ module.exports.loop = function () {
     }
 
     //processLinks.run();
-
-    //Unclaimed Rooms
 
     var myRooms = Game.rooms
     for (var name in myRooms )
@@ -64,6 +63,9 @@ module.exports.loop = function () {
             if (creep.memory.role == 'claim') {
                 rolePath.run(creep);
             }
+            if (creep.memory.role == 'miner') {
+                roleMining.run(creep);
+            }
         }
 
         //towers
@@ -79,7 +81,9 @@ module.exports.loop = function () {
     }
 
     function calculateAttackerCount(room) {
-        if (room.find(FIND_HOSTILE_CREEPS).length > 1) return 3;
+        if (room.name == 'E51N1' || room.name == 'E51N3') {
+            if (room.find(FIND_HOSTILE_CREEPS).length > 1) return 3;
+        }
     }
 
     function calculateCarrierCount(room) {

@@ -23,6 +23,7 @@ var processSpawning = {
         var attackers = _.filter(roomCreeps, (creep) => creep.memory.role == 'attacker');
         var carrierJnrs = _.filter(roomCreeps, (creep) => creep.memory.role == 'carrierjnr');
         var carriers = _.filter(roomCreeps, (creep) => creep.memory.role == 'carrier');
+        var miners = _.filter(roomCreeps, (creep) => creep.memory.role == 'miner');
 
         //console.log('Builders: ' + builders.length);
         //console.log('Harvesters: ' + harvesters.length)
@@ -35,6 +36,7 @@ var processSpawning = {
         var builderBody = buildBuilderBody();
         var upgraderBody = buildUpgraderBody();
         var attackerBody = buildAttackerBody();
+        var minerBody = [WORK ,WORK, WORK, WORK, CARRY, CARRY];
 
         for (var name in spawns)
         {
