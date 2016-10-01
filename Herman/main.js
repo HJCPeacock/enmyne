@@ -15,16 +15,17 @@ module.exports.loop = function () {
     //All Rooms
     //processLinks.run();
 
-    //params: builders, harvesters, upgraders, attackers, carriers
-    //processSpawning.run(2, Game.rooms['E51N1'].find(FIND_SOURCES).length, calculateUpgraderCount(), calculateAttackerCount(), 0);
-
     var myRooms = Game.rooms
     for (var name in myRooms )
     {
         var room = myRooms[name];
+
+        //Allerts
         //if (room.find(FIND_MY_CREEPS).length < 4) Game.notify('O balls; screep count in room ' + room.name + ' = ' + room.find(FIND_MY_CREEPS).length);
 
-        
+        //spawning
+        //params: builders, harvesters, upgraders, attackers, carriers
+        processSpawning.run(2, room.find(FIND_SOURCES).length, calculateUpgraderCount(), calculateAttackerCount(), 0);
 
         var myScreeps = room.find(FIND_MY_CREEPS);
         for (var name in myScreeps) {
@@ -54,12 +55,12 @@ module.exports.loop = function () {
                 rolePath.run(creep);
             }
         }
-    }
 
-    //run towers for room E51N1
-    var towers = Game.rooms['E51N1'].find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
-    for (var towerCounter = 0; towerCounter < towers.length; towerCounter++) {
-        processTowers.run(towers[towerCounter]);
+        //towers
+        var towers = room.find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
+        for (var towerCounter = 0; towerCounter < towers.length; towerCounter++) {
+            processTowers.run(towers[towerCounter]);
+        }
     }
 
     function calculateUpgraderCount() {
