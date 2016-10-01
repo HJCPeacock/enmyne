@@ -15,39 +15,44 @@ module.exports.loop = function () {
     //All Rooms
     //processLinks.run();
 
-    //For room E51N1
-    //if (Game.rooms['E51N1'].find(FIND_MY_CREEPS).length < 4) Game.notify('O balls; screep count in room E51N1 = ' + Game.rooms['E51N1'].find(FIND_MY_CREEPS).length);
-
     //params: builders, harvesters, upgraders, attackers, carriers
-    processSpawning.run(2, Game.rooms['E51N1'].find(FIND_SOURCES).length, calculateUpgraderCount(), calculateAttackerCount(), 0);
+    //processSpawning.run(2, Game.rooms['E51N1'].find(FIND_SOURCES).length, calculateUpgraderCount(), calculateAttackerCount(), 0);
 
-    //run roles for room E51N1
-    var myScreeps = Game.creeps;
-    for (var name in myScreeps) {
-        var creep = myScreeps[name];
-        if (creep.memory.role == 'harvester') {
-            roleHarvester.run(creep);
-        }
-        if (creep.memory.role == 'carrierjnr') {
-            roleCarrierJnr.run(creep);
-        }
-        if (creep.memory.role == 'carrier') {
-            roleCarrier.run(creep);
-        }
-        if (creep.memory.role == 'upgrader') {
-            roleUpgrader.run(creep);
-        }
-        if (creep.memory.role == 'builder') {
-            roleBuilder.run(creep);
-        }
-        if (creep.memory.role == 'repairer') {
-            roleRepairer.run(creep);
-        }
-        if (creep.memory.role == 'attacker') {
-            roleAttacker.run(creep);
-        }
-        if (creep.memory.role == 'claim') {
-            rolePath.run(creep);
+    var myRooms = Game.rooms
+    for (var name in myRooms )
+    {
+        var room = myRooms[name];
+        //if (room.find(FIND_MY_CREEPS).length < 4) Game.notify('O balls; screep count in room ' + room.name + ' = ' + room.find(FIND_MY_CREEPS).length);
+
+        
+
+        var myScreeps = room.find(FIND_MY_CREEPS);
+        for (var name in myScreeps) {
+            var creep = myScreeps[name];
+            if (creep.memory.role == 'harvester') {
+                roleHarvester.run(creep);
+            }
+            if (creep.memory.role == 'carrierjnr') {
+                roleCarrierJnr.run(creep);
+            }
+            if (creep.memory.role == 'carrier') {
+                roleCarrier.run(creep);
+            }
+            if (creep.memory.role == 'upgrader') {
+                roleUpgrader.run(creep);
+            }
+            if (creep.memory.role == 'builder') {
+                roleBuilder.run(creep);
+            }
+            if (creep.memory.role == 'repairer') {
+                roleRepairer.run(creep);
+            }
+            if (creep.memory.role == 'attacker') {
+                roleAttacker.run(creep);
+            }
+            if (creep.memory.role == 'claim') {
+                rolePath.run(creep);
+            }
         }
     }
 
