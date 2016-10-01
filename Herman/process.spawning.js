@@ -23,7 +23,7 @@ var processSpawning = {
         var attackers = _.filter(roomCreeps, (creep) => creep.memory.role == 'attacker');
         var carrierJnrs = _.filter(roomCreeps, (creep) => creep.memory.role == 'carrierjnr');
         var carriers = _.filter(roomCreeps, (creep) => creep.memory.role == 'carrier');
-        var miners = _.filter(roomCreeps, (creep) => creep.memory.role == 'miner');
+        var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
 
         //console.log('Builders: ' + builders.length);
         //console.log('Harvesters: ' + harvesters.length)
@@ -89,11 +89,15 @@ var processSpawning = {
             }
             else if (miners.length < 0 && room.name == 'E51N1') {
                 if (spawn.canCreateCreep(minerBody, undefined) == OK) {
-                    var newName = spawn.createCreep(minerBody, undefined, { role: 'miner', mining:false });
+                    var newName = spawn.createCreep(minerBody, undefined, { role: 'miner', room: setMinerRoom(), mining: false });
                     console.log('Spawning new attacker: ' + newName);
                 }
                 return;
             }
+        }
+
+        function setMinerRoom() {
+            if (_.filter(miners, (creep) => creep.memory.room == 'E51N2').length == 0) return 'E51N2';
         }
 
         function getSourceCount() {
