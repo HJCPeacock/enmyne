@@ -19,13 +19,14 @@ module.exports.loop = function () {
     for (var name in myRooms )
     {
         var room = myRooms[name];
+        var roomCreeps = room.find(FIND_MY_CREEPS)
 
         //Allerts
         //if (room.find(FIND_MY_CREEPS).length < 4) Game.notify('O balls; screep count in room ' + room.name + ' = ' + room.find(FIND_MY_CREEPS).length);
 
         //spawning
-        //params: builders, harvesters, upgraders, attackers, carriers, carriersjnr
-        processSpawning.run(2, room.find(FIND_SOURCES).length, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
+        //params: Room, builders, harvesters, upgraders, attackers, carriers, carriersjnr
+        processSpawning.run(room, roomCreeps, calculateBuilderCount(room), room.find(FIND_SOURCES).length, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
 
         var myScreeps = room.find(FIND_MY_CREEPS);
         for (var name in myScreeps) {
@@ -90,12 +91,9 @@ module.exports.loop = function () {
         return 1;
     }
 
-    function findSpawns(room) {
-        var spawns = room.find(FIND_STRUCTURES, {
-            filter: (structure) => {
-                return structure.structureType == STRUCTURE_LINK;
-            }
-        });
-        console.log(spawns);
+    function calculateBuilderCount(room) {
+        if (room.name == 'E51N1') return 2;
+        if (room.name == 'E51N3') return 2;
+        return 2;
     }
 }
