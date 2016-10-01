@@ -63,7 +63,7 @@ var processSpawning = {
             var carrierBody = buildCarrierBody();
             var builderBody = buildBuilderBody();
             var upgraderBody = buildUpgraderBody();
-            var attackerBody = [MOVE, MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, HEAL];
+            var attackerBody = buildAttackerBody();
 
             if (harvesters.length < hervesterlimit && spawn.canCreateCreep(harvesterBody, undefined) == OK) {
                 var newName = spawn.createCreep(harvesterBody, undefined, { role: 'harvester', harvesting: true, source: getSourceCount() == 0 ? 0 : 1 });
@@ -159,6 +159,21 @@ var processSpawning = {
                 return [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
             if (room.energyCapacityAvailable >= 1350 && hasLinks && hasStorage)
                 return [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];//10 - 10 = 0
+        }
+
+        function buildAttackerBody()
+        {
+            //based on plain terain
+            if (room.energyCapacityAvailable <= 300)
+                return [MOVE, RANGED_ATTACK];//2 - 2 = 0
+            if (room.energyCapacityAvailable <= 400)
+                return [MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK];//4 - 4 = 0
+            if (room.energyCapacityAvailable <= 700)
+                return [MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, HEAL];//6 - 6 = 0
+            if (room.energyCapacityAvailable <= 900)
+                return [MOVE, MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, HEAL];//8 - 8 = 0
+            if (room.energyCapacityAvailable >= 1200)
+                return [MOVE, MOVE, MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, HEAL, HEAL];//10 - 10 = 0
         }
     }
 };
