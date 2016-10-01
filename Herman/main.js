@@ -25,7 +25,7 @@ module.exports.loop = function () {
 
         //spawning
         //params: builders, harvesters, upgraders, attackers, carriers
-        processSpawning.run(2, room.find(FIND_SOURCES).length, calculateUpgraderCount(), calculateAttackerCount(), 0);
+        processSpawning.run(2, room.find(FIND_SOURCES).length, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room));
 
         var myScreeps = room.find(FIND_MY_CREEPS);
         for (var name in myScreeps) {
@@ -63,12 +63,17 @@ module.exports.loop = function () {
         }
     }
 
-    function calculateUpgraderCount() {
-        if (!Game.rooms['E51N1'].storage) return 2;
-        return Math.ceil(Game.rooms['E51N1'].storage.store[RESOURCE_ENERGY] / 10000);
+    function calculateUpgraderCount(room) {
+        if (!room.storage) return 2;
+        return Math.ceil(room.storage.store[RESOURCE_ENERGY] / 10000);
     }
 
-    function calculateAttackerCount() {
-        if (Game.rooms['E51N1'].find(FIND_HOSTILE_CREEPS).length > 1) return 3;
+    function calculateAttackerCount(room) {
+        if (room.find(FIND_HOSTILE_CREEPS).length > 1) return 3;
+    }
+
+    function calculateCarrierCount(room) {
+        if (!room.storage) return 0;
+        else if (room.storage.store[RESOURCE_ENERGY] > 1000) return 1;
     }
 }
