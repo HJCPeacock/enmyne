@@ -89,4 +89,13 @@ module.exports.loop = function () {
         }).length < 3) return 0;
         return 1;
     }
+
+    function findSpawns(room) {
+        var spawns = room.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+                return structure.structureType == STRUCTURE_LINK;
+            }
+        });
+        console.log(spawns);
+    }
 }
