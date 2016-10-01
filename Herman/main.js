@@ -13,20 +13,27 @@ var rolePath = require('role.claim');
 module.exports.loop = function () {
 
     //All Rooms
+
+    for (var name in Memory.creeps) {
+        if (!Game.creeps[name]) {
+            delete Memory.creeps[name];
+            console.log('Clearing non-existing creep memory:', name);
+        }
+    }
+
     //processLinks.run();
 
     var myRooms = Game.rooms
     for (var name in myRooms )
     {
         var room = myRooms[name];
-        var roomCreeps = room.find(FIND_MY_CREEPS)
-
+        
         //Allerts
         //if (room.find(FIND_MY_CREEPS).length < 4) Game.notify('O balls; screep count in room ' + room.name + ' = ' + room.find(FIND_MY_CREEPS).length);
 
         //spawning
         //params: Room, builders, harvesters, upgraders, attackers, carriers, carriersjnr
-        processSpawning.run(room, roomCreeps, calculateBuilderCount(room), room.find(FIND_SOURCES).length, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
+        processSpawning.run(room, calculateBuilderCount(room), room.find(FIND_SOURCES).length, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
 
         var myScreeps = room.find(FIND_MY_CREEPS);
         for (var name in myScreeps) {
