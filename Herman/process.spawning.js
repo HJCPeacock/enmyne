@@ -53,7 +53,7 @@ var processSpawning = {
             var harvesterBody = buildHarvesterBody();
             var carrierJnrBody = [CARRY, MOVE];
             var carrierBody = buildCarrierBody();
-            var builderBody = [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//[WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//950 | 1 * 8 / 8 = 1 | 8 * 2 - 2 * 8 = 0
+            var builderBody = buildBuilderBody();
             var upgraderBody = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//[WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]; //950 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
             var attackerBody = [MOVE, MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, HEAL];
 
@@ -89,6 +89,7 @@ var processSpawning = {
 
         function buildHarvesterBody()
         {
+            //based on roads
             if (room.energyCapacityAvailable <= 300)
                 return [WORK, CARRY, CARRY, MOVE, MOVE];//3 - 4 = -1
             if (room.energyCapacityAvailable <= 400)
@@ -103,6 +104,7 @@ var processSpawning = {
 
         function buildCarrierBody()
         {
+            //based on roads
             if (roomCreeps.length < 4)
                 return [CARRY, CARRY, MOVE, CARRY, CARRY, MOVE];
             if (room.energyCapacityAvailable <= 450)
@@ -113,6 +115,23 @@ var processSpawning = {
                 return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];//10 - 10 = 0
             if (room.energyCapacityAvailable >= 900)
                 return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//12 - 12 = 0
+        }
+
+        function buildBuilderBody()
+        {
+            //based on plain terain
+            if (room.energyCapacityAvailable <= 300)
+                return [WORK, CARRY, MOVE, MOVE];//4 - 4 = 0
+            if (room.energyCapacityAvailable <= 500)
+                return [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
+            if (room.energyCapacityAvailable <= 650)
+                return [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];//10 - 10 = 0
+            if (room.energyCapacityAvailable <= 900)
+                return [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//14 - 14 = 0
+            if (room.energyCapacityAvailable <= 1000)
+                return [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//16 - 16 = 0
+            if (room.energyCapacityAvailable >= 1250)
+                return [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//20 - 20 = 0
         }
     }
 };
