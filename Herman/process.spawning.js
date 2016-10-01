@@ -14,12 +14,6 @@ var processSpawning = {
             }
         });
 
-        var haslinks = room.find(FIND_STRUCTURES, {
-            filter: (structure) => {
-                return structure.structureType == STRUCTURE_LINK;
-            }
-        }) > 2;
-
         for (var name in spawns)
         {
             var spawn = spawns[name];
@@ -56,9 +50,9 @@ var processSpawning = {
             //K = terrain factor (1x for road, 2x for plain, 10x for swamp)
             //M = number of MOVE parts
 
-            var harvesterBody = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//harvesters.length == 0 ? [WORK, WORK, CARRY, MOVE] : [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]; //1200 | 0.5 * 10 / 5 = 1  | 8 * 1 - 2 * 4 = 8 - 8 = 0
-            var carrierJnrBody = [CARRY, MOVE]; //250 | | 4 * 2 - 2 * 3 = 2
-            var carrierBody = Game.rooms['E51N1'].find(FIND_MY_CREEPS).length < 4 ? [CARRY, CARRY, MOVE, CARRY, CARRY, MOVE] : [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; //550 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
+            var harvesterBody = buildHarvesterBody();
+            var carrierJnrBody = [CARRY, MOVE];
+            var carrierBody = buildCarrierBody();
             var builderBody = [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//[WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//950 | 1 * 8 / 8 = 1 | 8 * 2 - 2 * 8 = 0
             var upgraderBody = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//[WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]; //950 | 0.5 * 10 / 5 = 1  | 10 * 1 - 2 * 5 = 10 - 10 = 0
             var attackerBody = [MOVE, MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, HEAL];
@@ -93,7 +87,7 @@ var processSpawning = {
             }
         }
 
-        function harvesterBody()
+        function buildHarvesterBody()
         {
             if (room.energyCapacityAvailable <= 300)
                 return [WORK, CARRY, CARRY, MOVE, MOVE];//3 - 4 = -1
@@ -101,10 +95,24 @@ var processSpawning = {
                 return [WORK, WORK, CARRY, CARRY, MOVE, MOVE];//4 - 4 = 0
             if (room.energyCapacityAvailable <= 600)
                 return [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
-            if (room.energyCapacityAvailable <= 800 && !haslinks)
+            if (room.energyCapacityAvailable <= 800)
                 return [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
-            if (room.energyCapacityAvailable <= 850 && haslinks)
+            if (room.energyCapacityAvailable >= 850)
                 return [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
+        }
+
+        function buildCarrierBody()
+        {
+            if (roomCreeps.length < 4)
+                return [CARRY, CARRY, MOVE, CARRY, CARRY, MOVE];
+            if (room.energyCapacityAvailable <= 450)
+                return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
+            if (room.energyCapacityAvailable <= 600)
+                return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
+            if (room.energyCapacityAvailable <= 750)
+                return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];//10 - 10 = 0
+            if (room.energyCapacityAvailable >= 900)
+                return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//12 - 12 = 0
         }
     }
 };

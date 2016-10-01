@@ -80,6 +80,7 @@ module.exports.loop = function () {
 	                return structure.structureType == STRUCTURE_LINK;
         }
         }).length > 2) return 1;
+        else return 0;
     }
 
     function calculateCarrierJnrCount(room) {
