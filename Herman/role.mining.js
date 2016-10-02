@@ -37,8 +37,7 @@ var roleMining = {
                         creep.moveTo(target);
                     }
                 }
-
-                if (target && target.store[RESOURCE_ENERGY] < target.storeCapacity) {
+                else if (target && target.store[RESOURCE_ENERGY] < target.storeCapacity) {
                     if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target);
                     }
