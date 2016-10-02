@@ -7,10 +7,10 @@ var roleMining = {
         }
         else {
 
-            if (creep.carry.energy == 0) {
+            if (creep.memory.mining && creep.carry.energy == 0) {
                 creep.memory.mining = false;
             }
-            if (creep.carry.energy == creep.carryCapacity) {
+            if (!creep.memory.mining && creep.carry.energy == creep.carryCapacity) {
                 creep.memory.mining = true;
             }
 
