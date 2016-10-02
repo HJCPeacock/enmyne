@@ -89,7 +89,7 @@ var processSpawning = {
                 }
                 return;
             }
-            else if (miners.length < 0 && room.name == 'E51N1') {
+            else if (miners.length < 1 && room.name == 'E51N1') {
                 if (spawn.canCreateCreep(minerBody, undefined) == OK) {
                     var newName = spawn.createCreep(minerBody, undefined, { role: 'miner', room: setMinerRoom(), mining: false });
                     console.log('Spawning new miner: ' + newName);
