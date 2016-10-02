@@ -31,7 +31,7 @@ module.exports.loop = function () {
         var room = myRooms[name];
         
         //Allerts
-        if (room.find(FIND_MY_CREEPS).length < 3) Game.notify('O balls; screep count in room ' + room.name + ' = ' + room.find(FIND_MY_CREEPS).length);
+        if ((room.name == 'E51N1' || room.name == 'E51N1') && room.find(FIND_MY_CREEPS).length < 3) Game.notify('O balls; screep count in room ' + room.name + ' = ' + room.find(FIND_MY_CREEPS).length);
 
         //spawning
         //params: Room, builders, harvesters, upgraders, attackers, carriers, carriersjnr
