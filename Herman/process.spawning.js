@@ -41,7 +41,7 @@ var processSpawning = {
         var attackerBody = buildAttackerBody();
         var claimerBody = [MOVE, CLAIM, CLAIM, MOVE];
         var minerBody = [WORK, WORK, WORK, CARRY, MOVE, MOVE];
-        var moverBody = [WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
+        var moverBody = [WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];
 
         for (var name in spawns)
         {
@@ -155,6 +155,8 @@ var processSpawning = {
             //based on roads
             if (room.energyCapacityAvailable >= 850 && hasLinks && hasStorage)
                 return roomCreeps.length < 3 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
+            if (room.energyCapacityAvailable >= 950 && (!hasLinks || !hasStorage))
+                return roomCreeps.length < 3 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];//10 - 10 = 0
             if (room.energyCapacityAvailable >= 800 && (!hasLinks || !hasStorage))
                 return roomCreeps.length < 3 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
             if (room.energyCapacityAvailable >= 600)
