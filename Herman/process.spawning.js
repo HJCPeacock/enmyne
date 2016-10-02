@@ -40,7 +40,7 @@ var processSpawning = {
         var upgraderBody = buildUpgraderBody();
         var attackerBody = buildAttackerBody();
         var claimerBody = [MOVE, CLAIM, CLAIM, MOVE];
-        var minerBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE];
+        var minerBody = [WORK, WORK, WORK, CARRY, MOVE, MOVE];
         var moverBody = [WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
 
         for (var name in spawns)
