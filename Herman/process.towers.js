@@ -37,16 +37,19 @@ var processTowers = {
                 }
             }
 
-            //Add objects to memory
-            //var walls = Game.rooms['E51N1'].find(FIND_STRUCTURES, {
-            //    filter: (structure) => {
-            //        return structure.structureType == STRUCTURE_RAMPART;
-            //    }
-            //});
-            //for (var obj in walls) {
-            //    var wall = walls[obj];
-            //    //Memory.repairRamparts[wall.id] = {hp: wall.hits};
-            //}
+            //clear objects from memory
+            var removeObjects = Game.rooms['E51N1'].find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return structure.structureType == STRUCTURE_WALL || structure.structureType == STRUCTURE_RAMPART;
+                }
+            });
+            for (var objname in removeObjects) {
+                var obj = removeObjects[objname];
+                //if (!Memory.repairHP[obj]) {
+                //    delete Memory.repairHP[obj];
+                //}
+                console.log(obj);
+            }
         }
 	}
 };
