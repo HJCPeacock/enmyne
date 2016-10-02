@@ -25,7 +25,7 @@ var roleMover = {
                 var Exit = creep.pos.findClosestByRange(exitDir);
                 creep.moveTo(Exit);
 
-                var found = creep.room.lookForAt(LOOK_STRUCTURES, creep.pos);
+                var found = creep.pos.lookFor(LOOK_STRUCTURES);
                 if (found.length == 0) {
                     creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
                 }
