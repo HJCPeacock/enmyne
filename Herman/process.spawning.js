@@ -139,16 +139,16 @@ var processSpawning = {
         function buildHarvesterBody()
         {
             //based on roads
-            if (room.energyCapacityAvailable <= 300)
-                return [WORK, CARRY, CARRY, MOVE, MOVE];//3 - 4 = -1
-            if (room.energyCapacityAvailable <= 400)
-                return [WORK, WORK, CARRY, CARRY, MOVE, MOVE];//4 - 4 = 0
-            if (room.energyCapacityAvailable <= 600)
-                return [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
-            if (room.energyCapacityAvailable <= 800 || (room.energyCapacityAvailable >= 800 && (!hasLinks || !hasStorage)))
-                return roomCreeps.length < 3 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
             if (room.energyCapacityAvailable >= 850 && hasLinks && hasStorage)
                 return roomCreeps.length < 3 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
+            if (room.energyCapacityAvailable >= 800 && (!hasLinks || !hasStorage))
+                return roomCreeps.length < 3 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
+            if (room.energyCapacityAvailable >= 600)
+                return [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
+            if (room.energyCapacityAvailable >= 400)
+                return [WORK, WORK, CARRY, CARRY, MOVE, MOVE];//4 - 4 = 0
+            if (room.energyCapacityAvailable >= 300)
+                return [WORK, CARRY, CARRY, MOVE, MOVE];//3 - 4 = -1
         }
 
         function buildCarrierBody()
@@ -156,65 +156,65 @@ var processSpawning = {
             //based on roads
             if (roomCreeps.length < 4)
                 return [CARRY, CARRY, MOVE, CARRY, CARRY, MOVE];
-            if (room.energyCapacityAvailable <= 450)
-                return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
-            if (room.energyCapacityAvailable <= 600)
-                return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
-            if (room.energyCapacityAvailable <= 750)
-                return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];//10 - 10 = 0
             if (room.energyCapacityAvailable >= 900)
                 return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//12 - 12 = 0
+            if (room.energyCapacityAvailable >= 750)
+                return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];//10 - 10 = 0
+            if (room.energyCapacityAvailable >= 600)
+                return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
+            if (room.energyCapacityAvailable >= 450)
+                return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
         }
 
         function buildBuilderBody()
         {
             //based on plain terain
-            if (room.energyCapacityAvailable <= 300)
-                return [WORK, CARRY, MOVE, MOVE];//4 - 4 = 0
-            if (room.energyCapacityAvailable <= 500)
-                return [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
-            if (room.energyCapacityAvailable <= 650)
-                return [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];//10 - 10 = 0
-            if (room.energyCapacityAvailable <= 900)
-                return [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//14 - 14 = 0
-            if (room.energyCapacityAvailable <= 1000)
-                return [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//16 - 16 = 0
             if (room.energyCapacityAvailable >= 1250)
                 return [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//20 - 20 = 0
+            if (room.energyCapacityAvailable >= 1000)
+                return [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//16 - 16 = 0
+            if (room.energyCapacityAvailable >= 900)
+                return [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//14 - 14 = 0
+            if (room.energyCapacityAvailable >= 650)
+                return [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];//10 - 10 = 0
+            if (room.energyCapacityAvailable >= 500)
+                return [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
+            if (room.energyCapacityAvailable >= 300)
+                return [WORK, CARRY, MOVE, MOVE];//4 - 4 = 0
         }
 
         function buildUpgraderBody()
         {
             //based on roads
-            if (room.energyCapacityAvailable <= 300)
-                return [WORK, CARRY, CARRY, MOVE, MOVE];//3 - 4 = -1
-            if (room.energyCapacityAvailable <= 400)
-                return [WORK, WORK, CARRY, CARRY, MOVE, MOVE];//4 - 4 = 0
-            if (room.energyCapacityAvailable <= 600)
-                return [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
-            if (room.energyCapacityAvailable <= 800 || (room.energyCapacityAvailable >= 800 && (!hasLinks || !hasStorage)))
-                return [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
-            if (room.energyCapacityAvailable <= 850 && hasLinks && hasStorage)
-                return [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
-            if (room.energyCapacityAvailable <= 1100 && hasLinks && hasStorage)
-                return [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
             if (room.energyCapacityAvailable >= 1350 && hasLinks && hasStorage)
                 return [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];//10 - 10 = 0
+            if (room.energyCapacityAvailable >= 1100 && hasLinks && hasStorage)
+                return [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
+            if (room.energyCapacityAvailable >= 850 && hasLinks && hasStorage)
+                return [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
+            if (room.energyCapacityAvailable >= 800 && (!hasLinks || !hasStorage))
+                return [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
+            if (room.energyCapacityAvailable >= 600)
+                return [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
+            if (room.energyCapacityAvailable >= 400)
+                return [WORK, WORK, CARRY, CARRY, MOVE, MOVE];//4 - 4 = 0
+            if (room.energyCapacityAvailable >= 300)
+                return [WORK, CARRY, CARRY, MOVE, MOVE];//3 - 4 = -1
         }
 
         function buildAttackerBody()
         {
             //based on plain terain
-            if (room.energyCapacityAvailable <= 300)
-                return [MOVE, RANGED_ATTACK];//2 - 2 = 0
-            if (room.energyCapacityAvailable <= 400)
-                return [MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK];//4 - 4 = 0
-            if (room.energyCapacityAvailable <= 700)
-                return [MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, HEAL];//6 - 6 = 0
-            if (room.energyCapacityAvailable <= 900)
-                return [MOVE, MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, HEAL];//8 - 8 = 0
             if (room.energyCapacityAvailable >= 1200)
                 return [MOVE, MOVE, MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, HEAL, HEAL];//10 - 10 = 0
+            if (room.energyCapacityAvailable >= 900)
+                return [MOVE, MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, HEAL];//8 - 8 = 0
+            if (room.energyCapacityAvailable >= 700)
+                return [MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, HEAL];//6 - 6 = 0
+            if (room.energyCapacityAvailable >= 400)
+                return [MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK];//4 - 4 = 0
+            if (room.energyCapacityAvailable >= 300)
+                return [MOVE, RANGED_ATTACK];//2 - 2 = 0
         }
     }
 };
