@@ -45,10 +45,9 @@ var processTowers = {
             });
             for (var objname in removeObjects) {
                 var obj = removeObjects[objname];
-                //if (!Memory.repairHP[obj]) {
-                //    delete Memory.repairHP[obj];
-                //}
-                console.log(obj);
+                if (!Memory.repairHP[obj.id]) {
+                    delete Memory.repairHP[obj.id];
+                }
             }
         }
 	}
