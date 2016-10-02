@@ -11,15 +11,30 @@ var rolePath = {
             creep.moveTo(Exit);
         }
         else {
-            if (creep.memory.upgrading != undefined) {
+            if (creep.memory.dismantel != undefined) {
+                var targetlink = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return structure.structureType == STRUCTURE_CONTAINER;
+                    }
+                });
+                if (targetlink) {
+                    if (creep.dismantle(targetlink) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(targetlink);
+                    }
+                }
+            }
+            else if (creep.memory.upgrading != undefined) {
                 roleUpgrader.run(creep);
             }
-            if (creep.memory.building != undefined) {
+            else if (creep.memory.building != undefined) {
                 roleBuilder.run(creep);
             }
-            if (creep.room.controller) {
-                if (creep.claimController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(creep.room.controller);
+            else if (creep.memory.claim != undefined) {
+                    if (creep.room.controller)
+                    {
+                        if (creep.claimController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(creep.room.controller);
+                    }
                 }
             }
         }
