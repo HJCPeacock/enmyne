@@ -24,7 +24,7 @@ var roleMover = {
                 var exitDir = Game.map.findExit(creep.room.name, 'E51N1');
                 var Exit = creep.pos.findClosestByRange(exitDir);
                
-                var found = creep.pos.lookFor(LOOK_STRUCTURES);
+                //var found = creep.pos.lookFor(LOOK_STRUCTURES);
                 var building = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
                 var repairUnit = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
@@ -32,10 +32,10 @@ var roleMover = {
                     }
                 });
 
-                if (found.length == 0) {
-                    creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
-                }
-                else if (building) {
+                //if (found.length == 0) {
+                //    creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
+                //}
+                if (building) {
                     if (creep.build(building) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(building);
                     } else creep.moveTo(Exit);
