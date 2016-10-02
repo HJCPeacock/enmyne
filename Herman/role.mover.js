@@ -9,7 +9,7 @@ var roleMover = {
             } else {
                 var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > 0;
+                        return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= creep.carryCapacity;
                     }
                 });
                 if (source) {
@@ -24,7 +24,6 @@ var roleMover = {
                 var exitDir = Game.map.findExit(creep.room.name, 'E51N1');
                 var Exit = creep.pos.findClosestByRange(exitDir);
                
-
                 var found = creep.pos.lookFor(LOOK_STRUCTURES);
                 var building = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
                 var repairUnit = creep.pos.findClosestByRange(FIND_STRUCTURES, {

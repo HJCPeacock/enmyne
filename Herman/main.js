@@ -8,9 +8,10 @@ var roleAttacker = require('role.attack');
 var processSpawning = require('process.spawning');
 var processTowers = require('process.towers');
 var processLinks = require('process.links');
-var rolePath = require('role.claim');
+var roleClaim = require('role.claim');
 var roleMining = require('role.mining');
 var roleMover = require('role.mover');
+var roleExplorer = require('role.explorer');
 
 module.exports.loop = function () {
 
@@ -62,13 +63,16 @@ module.exports.loop = function () {
                 roleAttacker.run(creep);
             }
             if (creep.memory.role == 'claim') {
-                rolePath.run(creep);
+                roleClaim.run(creep);
             }
             if (creep.memory.role == 'miner') {
                 roleMining.run(creep);
             }
             if (creep.memory.role == 'mover') {
                 roleMover.run(creep);
+            }
+            if (creep.memory.role == 'explorer') {
+                roleExplorer.run(creep);
             }
         }
 

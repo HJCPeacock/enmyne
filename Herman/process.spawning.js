@@ -23,8 +23,10 @@ var processSpawning = {
         var attackers = _.filter(roomCreeps, (creep) => creep.memory.role == 'attacker');
         var carrierJnrs = _.filter(roomCreeps, (creep) => creep.memory.role == 'carrierjnr');
         var carriers = _.filter(roomCreeps, (creep) => creep.memory.role == 'carrier');
+
         var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
         var movers = _.filter(Game.creeps, (creep) => creep.memory.role == 'mover');
+        var claimers = _.filter(Game.creeps, (creep) => creep.memory.role == 'claim');
 
         //console.log('Builders: ' + builders.length);
         //console.log('Harvesters: ' + harvesters.length)
@@ -37,6 +39,7 @@ var processSpawning = {
         var builderBody = buildBuilderBody();
         var upgraderBody = buildUpgraderBody();
         var attackerBody = buildAttackerBody();
+        var claimerBody = [MOVE, CLAIM, CLAIM, MOVE];
         var minerBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE];
         var moverBody = [WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
 
@@ -103,6 +106,13 @@ var processSpawning = {
                 }
                 return;
             }
+            else if (claimers.length < 1 && room.name == 'E51N1') {
+                if (spawn.canCreateCreep(claimerBody, undefined) == OK) {
+                    var newName = spawn.createCreep(claimerBody, undefined, { role: 'claim', room: setClaimRoom() });
+                    console.log('Spawning new claimer: ' + newName);
+                }
+                return;
+            }
         }
 
         function setMinerRoom() {
@@ -111,6 +121,10 @@ var processSpawning = {
 
         function setMoverRoom() {
             if (_.filter(movers, (creep) => creep.memory.room == 'E51N2').length == 0) return 'E51N2';
+        }
+
+        function setClaimRoom() {
+            if (_.filter(claimers, (creep) => creep.memory.room == 'E51N2').length == 0) return 'E51N2';
         }
 
         function getSourceCount() {
