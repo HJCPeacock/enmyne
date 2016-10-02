@@ -31,7 +31,7 @@ module.exports.loop = function () {
         var room = myRooms[name];
         
         //Allerts
-        //if (room.find(FIND_MY_CREEPS).length < 4) Game.notify('O balls; screep count in room ' + room.name + ' = ' + room.find(FIND_MY_CREEPS).length);
+        if (room.find(FIND_MY_CREEPS).length < 4) Game.notify('O balls; screep count in room ' + room.name + ' = ' + room.find(FIND_MY_CREEPS).length);
 
         //spawning
         //params: Room, builders, harvesters, upgraders, attackers, carriers, carriersjnr
@@ -114,4 +114,17 @@ module.exports.loop = function () {
         if (room.name == 'E51N3') return 1;
         return 0;
     }
+
+    //clear objects from memory
+    //var removeObjects = Game.rooms['E51N1'].find(FIND_STRUCTURES, {
+    //    filter: (structure) => {
+    //        return structure.structureType == STRUCTURE_WALL || structure.structureType == STRUCTURE_RAMPART;
+    //    }
+    //});
+    //for (var objname in removeObjects) {
+    //    var obj = removeObjects[objname];
+    //    if (!Memory.repairHP[obj.id]) {
+    //        delete Memory.repairHP[obj.id];
+    //    }
+    //}
 }

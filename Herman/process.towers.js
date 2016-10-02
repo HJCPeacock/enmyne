@@ -36,19 +36,6 @@ var processTowers = {
                     }
                 }
             }
-
-            //clear objects from memory
-            var removeObjects = Game.rooms['E51N1'].find(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return structure.structureType == STRUCTURE_WALL || structure.structureType == STRUCTURE_RAMPART;
-                }
-            });
-            for (var objname in removeObjects) {
-                var obj = removeObjects[objname];
-                if (!Memory.repairHP[obj.id]) {
-                    delete Memory.repairHP[obj.id];
-                }
-            }
         }
 	}
 };
