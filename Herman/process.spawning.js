@@ -96,7 +96,7 @@ var processSpawning = {
                 }
                 return;
             }
-            else if (movers.length < 0 && room.name == 'E51N1') {
+            else if (movers.length < 1 && room.name == 'E51N1') {
                 if (spawn.canCreateCreep(moverBody, undefined) == OK) {
                     var newName = spawn.createCreep(moverBody, undefined, { role: 'mover', room: setMoverRoom() });
                     console.log('Spawning new mover: ' + newName);
