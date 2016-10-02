@@ -38,7 +38,7 @@ var roleMover = {
                 else if (building) {
                     if (creep.build(building) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(building);
-                    }
+                    } else creep.moveTo(Exit);
                 }
                 else if (repairUnit)
                 {
