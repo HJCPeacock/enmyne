@@ -17,10 +17,12 @@ var roleCarrier = {
             else {
                 var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return structure.structureType == STRUCTURE_STORAGE;
+                        return structure.structureType == STRUCTURE_STORAGE && structure.store[RESOURCE_ENERGY] > 0;
                     }
                 });
-                if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) creep.moveTo(source);
+                if (source) {
+                    if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) creep.moveTo(source);
+                }
             }
         }
         else {
