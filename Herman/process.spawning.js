@@ -145,7 +145,7 @@ var processSpawning = {
                 return [WORK, WORK, CARRY, CARRY, MOVE, MOVE];//4 - 4 = 0
             if (room.energyCapacityAvailable <= 600)
                 return [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
-            if (room.energyCapacityAvailable <= 800 || room.energyCapacityAvailable >= 800 && (!hasLinks || !hasStorage))
+            if (room.energyCapacityAvailable <= 800 || (room.energyCapacityAvailable >= 800 && (!hasLinks || !hasStorage)))
                 return roomCreeps.length < 3 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
             if (room.energyCapacityAvailable >= 850 && hasLinks && hasStorage)
                 return roomCreeps.length < 3 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
