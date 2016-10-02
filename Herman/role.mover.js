@@ -9,7 +9,7 @@ var roleMover = {
             } else {
                 var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return structure.structureType == STRUCTURE_STORAGE;
+                        return structure.structureType == STRUCTURE_CONTAINER;
                     }
                 });
                 if (source) {
