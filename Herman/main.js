@@ -10,6 +10,7 @@ var processTowers = require('process.towers');
 var processLinks = require('process.links');
 var rolePath = require('role.claim');
 var roleMining = require('role.mining');
+var roleMover = require('role.mover');
 
 module.exports.loop = function () {
 
@@ -65,6 +66,9 @@ module.exports.loop = function () {
             }
             if (creep.memory.role == 'miner') {
                 roleMining.run(creep);
+            }
+            if (creep.memory.role == 'mover') {
+                roleMover.run(creep);
             }
         }
 

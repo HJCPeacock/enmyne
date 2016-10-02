@@ -19,12 +19,12 @@ var roleRepair = {
 	    });
 	    if (rampart)
 	    {
-	        if (creep.repair(rampart, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+	        if (creep.repair(rampart) == ERR_NOT_IN_RANGE) {
 	            creep.moveTo(rampart);
 	        }
 	    }
         else if(target) {
-            if(creep.repair(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            if(creep.repair(target) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }
         }
