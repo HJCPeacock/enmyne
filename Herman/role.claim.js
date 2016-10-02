@@ -11,12 +11,16 @@ var rolePath = {
             creep.moveTo(Exit);
         }
         else {
-           
             if (creep.memory.upgrading != undefined) {
                 roleUpgrader.run(creep);
             }
             if (creep.memory.building != undefined) {
                 roleBuilder.run(creep);
+            }
+            if (creep.room.controller) {
+                if (creep.claimController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(creep.room.controller);
+                }
             }
         }
     }
