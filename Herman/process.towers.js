@@ -9,10 +9,10 @@ var processTowers = {
             
             var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (closestwWallRmpart(structure) || (structure.structureType == STRUCTURE_SPAWN && structure.hits < structure.hitsMax) ||
-                                (structure.structureType == STRUCTURE_TOWER && structure.hits < structure.hitsMax) ||
-                                (structure.structureType == STRUCTURE_ROAD && structure.hits < structure.hitsMax)
-                                );
+                    return closestwWallRmpart(structure) ||
+                           ((structure.structureType == STRUCTURE_SPAWN  ||
+                            structure.structureType == STRUCTURE_TOWER ||
+                            structure.structureType == STRUCTURE_ROAD) && structure.hits < structure.hitsMax);
                 }
             });
             
