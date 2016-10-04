@@ -99,16 +99,17 @@ var processSpawning = {
                 }
                 return;
             }
-            else if (movers.length < 2 && room.name == 'E51N1') {
+            else if (movers.length < 3 && room.name == 'E51N1') {
                 if (spawn.canCreateCreep(moverBody, undefined) == OK) {
                     var newName = spawn.createCreep(moverBody, undefined, { role: 'mover', room: setMoverRoom() });
                     console.log('Spawning new mover: ' + newName);
                 }
                 return;
             }
-            else if (claimers.length < 1 && room.name == 'E51N1') {
+            else if (claimers.length < 2 && room.name == 'E51N1') {
                 var claimRoom = setClaimRoom();
                 if (claimRoom == 'E51N2' && Game.rooms['E51N2'].controller.reservation.ticksToEnd > 3000) claimerBody = [CLAIM, MOVE];
+                if (claimRoom == 'E52N1' && Game.rooms['E52N1'].controller.reservation.ticksToEnd > 3000) claimerBody = [CLAIM, MOVE];
                 if (spawn.canCreateCreep(claimerBody, undefined) == OK) {
                     var newName = spawn.createCreep(claimerBody, undefined, { role: 'claim', room: claimRoom });
                     console.log('Spawning new claimer: ' + newName);
@@ -124,10 +125,12 @@ var processSpawning = {
 
         function setMoverRoom() {
             if (_.filter(movers, (creep) => creep.memory.room == 'E51N2').length < 2) return 'E51N2';
+            if (_.filter(movers, (creep) => creep.memory.room == 'E52N1').length == 0) return 'E52N1';
         }
 
         function setClaimRoom() {
             if (_.filter(claimers, (creep) => creep.memory.room == 'E51N2').length == 0) return 'E51N2';
+            if (_.filter(claimers, (creep) => creep.memory.room == 'E52N1').length == 0) return 'E52N1';
         }
 
         function getSourceCount() {
