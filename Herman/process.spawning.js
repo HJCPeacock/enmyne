@@ -50,7 +50,7 @@ var processSpawning = {
 
             if (harvesters.length < hervesterlimit) {
                 if (spawn.canCreateCreep(harvesterBody, undefined) == OK) {
-                    var newName = spawn.createCreep(harvesterBody, undefined, { role: 'harvester', harvesting: true, source: getSourceCount() == 0 ? 0 : 1 });
+                    var newName = spawn.createCreep(harvesterBody, undefined, { role: 'harvester', harvesting: true, source: getSourceCount() });
                     console.log('Spawning new harvester: ' + newName);
                 }
                 return;
@@ -128,7 +128,15 @@ var processSpawning = {
         }
 
         function getSourceCount() {
-            return _.filter(harvesters, (creep) => creep.memory.source == 0).length;
+            var res = _.filter(harvesters, (creep) => creep.memory.source == 0).length;
+            if (hervesterlimit > 2)
+            {
+                if (res < 2) return 0;
+                else return 1;
+            } else {
+                if (res == 0) return 0;
+                else return 1;
+            }
         }
 
         //Body Parts
@@ -154,11 +162,9 @@ var processSpawning = {
         {
             //based on roads
             if (room.energyCapacityAvailable >= 850 && hasLinks && hasStorage)
-                return roomCreeps.length < 3 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
-            //if (room.energyCapacityAvailable >= 950 && (!hasLinks || !hasStorage))
-               // return roomCreeps.length < 3 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];//10 - 10 = 0
+                return roomCreeps.length < 2 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
             if (room.energyCapacityAvailable >= 800 && (!hasLinks || !hasStorage))
-                return roomCreeps.length < 3 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
+                return roomCreeps.length < 2 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
             if (room.energyCapacityAvailable >= 600)
                 return [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
             if (room.energyCapacityAvailable >= 400)

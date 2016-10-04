@@ -32,11 +32,11 @@ module.exports.loop = function () {
         var room = myRooms[name];
         
         //Allerts
-        if ((room.name == 'E51N1' || room.name == 'E51N1') && room.find(FIND_MY_CREEPS).length < 3) Game.notify('O balls; screep count in room ' + room.name + ' = ' + room.find(FIND_MY_CREEPS).length);
+        if ((room.name == 'E51N1' || room.name == 'E51N1') && room.find(FIND_MY_CREEPS).length < 2) Game.notify('O balls; screep count in room ' + room.name + ' = ' + room.find(FIND_MY_CREEPS).length);
 
         //spawning
         //params: Room, builders, harvesters, upgraders, attackers, carriers, carriersjnr
-        processSpawning.run(room, calculateBuilderCount(room), room.find(FIND_SOURCES).length, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
+        processSpawning.run(room, calculateBuilderCount(room), room.name == 'E51N1' ? 4 : room.find(FIND_SOURCES).length, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
 
         var myScreeps = room.find(FIND_MY_CREEPS);
         for (var screepname in myScreeps) {
