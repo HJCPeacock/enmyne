@@ -92,7 +92,7 @@ var processSpawning = {
                 }
                 return;
             }
-            else if (miners.length < 1 && room.name == 'E51N1') {
+            else if (miners.length < 2 && room.name == 'E51N1') {
                 if (spawn.canCreateCreep(minerBody, undefined) == OK) {
                     var newName = spawn.createCreep(minerBody, undefined, { role: 'miner', room: setMinerRoom(), mining: false });
                     console.log('Spawning new miner: ' + newName);
@@ -119,6 +119,7 @@ var processSpawning = {
 
         function setMinerRoom() {
             if (_.filter(miners, (creep) => creep.memory.room == 'E51N2').length == 0) return 'E51N2';
+            if (_.filter(miners, (creep) => creep.memory.room == 'E52N1').length == 0) return 'E52N1';
         }
 
         function setMoverRoom() {
