@@ -107,8 +107,10 @@ var processSpawning = {
                 return;
             }
             else if (claimers.length < 1 && room.name == 'E51N1') {
+                var claimRoom = setClaimRoom();
+                if (claimRoom == 'E51N2' && Game.rooms['E51N2'].controller.reservation.ticksToEnd > 4500) claimerBody = [CLAIM, MOVE];
                 if (spawn.canCreateCreep(claimerBody, undefined) == OK) {
-                    var newName = spawn.createCreep(claimerBody, undefined, { role: 'claim', room: setClaimRoom() });
+                    var newName = spawn.createCreep(claimerBody, undefined, { role: 'claim', room: claimRoom });
                     console.log('Spawning new claimer: ' + newName);
                 }
                 return;
