@@ -17,6 +17,8 @@ var processSpawning = {
 
         var roomCreeps = room.find(FIND_MY_CREEPS);
 
+        if (hasStorage && hasLinks) hervesterlimit = 2;
+
         var builders = _.filter(roomCreeps, (creep) => creep.memory.role == 'builder');
         var harvesters = _.filter(roomCreeps, (creep) => creep.memory.role == 'harvester');
         var upgraders = _.filter(roomCreeps, (creep) => creep.memory.role == 'upgrader');
@@ -108,8 +110,8 @@ var processSpawning = {
             }
             else if (claimers.length < 2 && room.name == 'E51N1') {
                 var claimRoom = setClaimRoom();
-                if (claimRoom == 'E51N2' && Game.rooms['E51N2'].controller.reservation && Game.rooms['E51N2'].controller.reservation.ticksToEnd > 3000) claimerBody = [CLAIM, MOVE];
-                if (claimRoom == 'E52N1' && Game.rooms['E52N1'].controller.reservation && Game.rooms['E52N1'].controller.reservation.ticksToEnd > 3000) claimerBody = [CLAIM, MOVE];
+                if (claimRoom == 'E51N2' && Game.rooms['E51N2'] && Game.rooms['E51N2'].controller.reservation && Game.rooms['E51N2'].controller.reservation.ticksToEnd > 3000) claimerBody = [CLAIM, MOVE];
+                if (claimRoom == 'E52N1' && Game.rooms['E52N1'] && Game.rooms['E52N1'].controller.reservation && Game.rooms['E52N1'].controller.reservation.ticksToEnd > 3000) claimerBody = [CLAIM, MOVE];
                 if (spawn.canCreateCreep(claimerBody, undefined) == OK) {
                     var newName = spawn.createCreep(claimerBody, undefined, { role: 'claim', room: claimRoom });
                     console.log('Spawning new claimer: ' + newName);
@@ -167,10 +169,11 @@ var processSpawning = {
         function buildHarvesterBody()
         {
             //based on roads
+            if (roomCreeps.length <= 2) return [WORK, CARRY, CARRY, MOVE, MOVE];
             if (room.energyCapacityAvailable >= 850 && hasLinks && hasStorage)
-                return roomCreeps.length < 2 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
+                return [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
             if (room.energyCapacityAvailable >= 800 && (!hasLinks || !hasStorage))
-                return roomCreeps.length < 2 ? [WORK, CARRY, CARRY, MOVE, MOVE] : [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
+                return [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
             if (room.energyCapacityAvailable >= 600)
                 return [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
             if (room.energyCapacityAvailable >= 400)
@@ -214,6 +217,7 @@ var processSpawning = {
         function buildUpgraderBody()
         {
             //based on roads
+            if (roomCreeps.length <= 2) return [WORK, CARRY, CARRY, MOVE, MOVE];
             if (room.energyCapacityAvailable >= 1350 && hasLinks && hasStorage)
                 return [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];//10 - 10 = 0
             if (room.energyCapacityAvailable >= 1100 && hasLinks && hasStorage)

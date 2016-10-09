@@ -36,7 +36,7 @@ module.exports.loop = function () {
 
         //spawning
         //params: Room, builders, harvesters, upgraders, attackers, carriers, carriersjnr
-        processSpawning.run(room, calculateBuilderCount(room), room.name == 'E51N1' ? 4 : room.find(FIND_SOURCES).length, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
+        processSpawning.run(room, calculateBuilderCount(room), 4, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
 
         var myScreeps = room.find(FIND_MY_CREEPS);
         for (var screepname in myScreeps) {
