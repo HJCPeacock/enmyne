@@ -61,8 +61,7 @@ module.exports.loop = function () {
             roleExplorer.run(creep);
         }
     }
-    //processLinks.run();
-
+    
     var myRooms = Game.rooms
     for (var name in myRooms )
     {
@@ -74,6 +73,9 @@ module.exports.loop = function () {
         //spawning
         //params: Room, builders, harvesters, upgraders, attackers, carriers, carriersjnr
         processSpawning.run(room, calculateBuilderCount(room), 4, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
+
+        //Links
+        processLinks.run(room);
 
         //towers
         var towers = room.find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
