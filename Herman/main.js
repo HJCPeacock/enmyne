@@ -24,6 +24,43 @@ module.exports.loop = function () {
         }
     }
 
+    var myScreeps = Game.creeps;
+    for (var screepname in myScreeps) {
+        var creep = myScreeps[screepname];
+        if (creep.memory.role == 'harvester') {
+            roleHarvester.run(creep);
+        }
+        if (creep.memory.role == 'carrierjnr') {
+            roleCarrierJnr.run(creep);
+        }
+        if (creep.memory.role == 'carrier') {
+            roleCarrier.run(creep);
+        }
+        if (creep.memory.role == 'upgrader') {
+            roleUpgrader.run(creep);
+        }
+        if (creep.memory.role == 'builder') {
+            roleBuilder.run(creep);
+        }
+        if (creep.memory.role == 'repairer') {
+            roleRepairer.run(creep);
+        }
+        if (creep.memory.role == 'attacker') {
+            roleAttacker.run(creep);
+        }
+        if (creep.memory.role == 'claim') {
+            roleClaim.run(creep);
+        }
+        if (creep.memory.role == 'miner') {
+            roleMining.run(creep);
+        }
+        if (creep.memory.role == 'mover') {
+            roleMover.run(creep);
+        }
+        if (creep.memory.role == 'explorer') {
+            roleExplorer.run(creep);
+        }
+    }
     //processLinks.run();
 
     var myRooms = Game.rooms
@@ -37,44 +74,6 @@ module.exports.loop = function () {
         //spawning
         //params: Room, builders, harvesters, upgraders, attackers, carriers, carriersjnr
         processSpawning.run(room, calculateBuilderCount(room), 4, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
-
-        var myScreeps = room.find(FIND_MY_CREEPS);
-        for (var screepname in myScreeps) {
-            var creep = myScreeps[screepname];
-            if (creep.memory.role == 'harvester') {
-                roleHarvester.run(creep);
-            }
-            if (creep.memory.role == 'carrierjnr') {
-                roleCarrierJnr.run(creep);
-            }
-            if (creep.memory.role == 'carrier') {
-                roleCarrier.run(creep);
-            }
-            if (creep.memory.role == 'upgrader') {
-                roleUpgrader.run(creep);
-            }
-            if (creep.memory.role == 'builder') {
-                roleBuilder.run(creep);
-            }
-            if (creep.memory.role == 'repairer') {
-                roleRepairer.run(creep);
-            }
-            if (creep.memory.role == 'attacker') {
-                roleAttacker.run(creep);
-            }
-            if (creep.memory.role == 'claim') {
-                roleClaim.run(creep);
-            }
-            if (creep.memory.role == 'miner') {
-                roleMining.run(creep);
-            }
-            if (creep.memory.role == 'mover') {
-                roleMover.run(creep);
-            }
-            if (creep.memory.role == 'explorer') {
-                roleExplorer.run(creep);
-            }
-        }
 
         //towers
         var towers = room.find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
