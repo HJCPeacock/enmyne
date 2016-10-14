@@ -115,7 +115,7 @@ module.exports.loop = function () {
 
     function calculateBuilderCount(room) {
         if (room.name == 'E51N1') return 1;
-        if (room.name == 'E51N3') return 2;
+        if (room.name == 'E51N3') return 1;
         return 0;
     }
 
