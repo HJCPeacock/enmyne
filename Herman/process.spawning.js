@@ -11,13 +11,19 @@ var processSpawning = {
             filter: (structure) => {
                 return structure.structureType == STRUCTURE_LINK;
             }
-        }).length > 2;
+        }).length > 1;
 
         var hasStorage = !(room.storage == undefined);
 
+        var hasContainer = room.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+                return structure.structureType == STRUCTURE_CONTAINER;
+            }
+        }).length > 0;
+
         var roomCreeps = room.find(FIND_MY_CREEPS);
 
-        if (hasStorage && hasLinks) hervesterlimit = 2;
+        if (hasContainer || hasLinks) hervesterlimit = 2;
 
         var builders = _.filter(roomCreeps, (creep) => creep.memory.role == 'builder');
         var harvesters = _.filter(roomCreeps, (creep) => creep.memory.role == 'harvester');
@@ -101,9 +107,12 @@ var processSpawning = {
                 }
                 return;
             }
-            else if (movers.length < 4 && room.name == 'E51N1') {
+            else if (movers.length < 5) {
                 if (spawn.canCreateCreep(moverBody, undefined) == OK) {
-                    var newName = spawn.createCreep(moverBody, undefined, { role: 'mover', room: setMoverRoom() });
+                    var desRoom = setMoverRoom();
+                    var inHouse = setInhouse(desRoom);
+                    if ((inHouse && !hasContainer) || (!inHouse && room.name == 'E51N3')) return;
+                    var newName = spawn.createCreep(moverBody, undefined, { role: 'mover', room: desRoom, inHouse: inHouse });
                     console.log('Spawning new mover: ' + newName);
                 }
                 return;
@@ -126,6 +135,8 @@ var processSpawning = {
         }
 
         function setMoverRoom() {
+            if (_.filter(movers, (creep) => creep.memory.room == 'E51N1').length == 0) return 'E51N1';
+            if (_.filter(movers, (creep) => creep.memory.room == 'E51N3').length == 0) return 'E51N3';
             if (_.filter(movers, (creep) => creep.memory.room == 'E51N2').length < 2) return 'E51N2';
             if (_.filter(movers, (creep) => creep.memory.room == 'E52N1').length < 2) return 'E52N1';
         }
@@ -133,6 +144,12 @@ var processSpawning = {
         function setClaimRoom() {
             if (_.filter(claimers, (creep) => creep.memory.room == 'E51N2').length == 0) return 'E51N2';
             if (_.filter(claimers, (creep) => creep.memory.room == 'E52N1').length == 0) return 'E52N1';
+        }
+
+        function setInhouse(desRoom) {
+            if (desRoom == 'E51N1') return true;
+            if (desRoom == 'E51N3') return true;
+            return false;
         }
 
         function getSourceCount() {

@@ -22,13 +22,18 @@ var roleHarvester = {
 	        }
         }
         else {
-            var targetlink = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+	        var targetlink = creep.pos.findInRange(FIND_STRUCTURES, 6, {
                     filter: (structure) => {
-                        return structure.structureType == STRUCTURE_LINK && structure.energy < structure.energyCapacity;
+                        return structure.structureType == STRUCTURE_LINK || structure.structureType == STRUCTURE_CONTAINER;
                     }
             });
-            if(targetlink) {
-                if(creep.transfer(targetlink, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+	        if (targetlink) {
+	            if (targetlink.hits < targetlink.hitsMax) {
+	                if (creep.repair(targetlink) == ERR_NOT_IN_RANGE) {
+	                    creep.moveTo(targetlink);
+	                }
+	            }
+                else if(creep.transfer(targetlink, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targetlink);
                 }
             }
@@ -43,19 +48,6 @@ var roleHarvester = {
                 if (target) {
                     if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target);
-                    }
-                }
-                else {
-                    var storage = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                        filter: (structure) => {
-                            return structure.structureType == STRUCTURE_STORAGE;
-                        }
-                    });
-                    if (storage)
-                    {
-                        if (creep.transfer(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(storage);
-                        }
                     }
                 }
             }

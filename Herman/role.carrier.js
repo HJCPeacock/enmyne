@@ -58,7 +58,7 @@ var roleCarrier = {
 
         function getTowerVolumes() {
             var lowest = 1000;
-            var towers = Game.rooms['E51N1'].find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
+            var towers = creep.room.find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
             for (var towername in towers) {
                 var tower = towers[towername];
                 if (tower.energy <= lowest) lowest = tower.energy;

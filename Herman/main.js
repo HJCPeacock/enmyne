@@ -3,7 +3,6 @@ var roleCarrierJnr = require('role.carrierjnr');
 var roleCarrier = require('role.carrier');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
-var roleRepairer = require('role.repairer');
 var roleAttacker = require('role.attack');
 var processSpawning = require('process.spawning');
 var processTowers = require('process.towers');
@@ -41,9 +40,6 @@ module.exports.loop = function () {
         }
         if (creep.memory.role == 'builder') {
             roleBuilder.run(creep);
-        }
-        if (creep.memory.role == 'repairer') {
-            roleRepairer.run(creep);
         }
         if (creep.memory.role == 'attacker') {
             roleAttacker.run(creep);
