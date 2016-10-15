@@ -24,13 +24,13 @@ var roleHarvester = {
         else {
 	        var targetlink = creep.pos.findInRange(FIND_STRUCTURES, 6, {
                     filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_LINK || structure.structureType == STRUCTURE_CONTAINER) && structure.energyCapacity;
+                        return ((structure.structureType == STRUCTURE_LINK && structure.energyCapacity) || (structure.structureType == STRUCTURE_CONTAINER && structure.storeCapacitynumber));
                     }
             });
-	        if (targetlink) {
-	            if (targetlink.hits < targetlink.hitsMax) {
-	                if (creep.repair(targetlink) == ERR_NOT_IN_RANGE) {
-	                    creep.moveTo(targetlink);
+	        if (targetlink.length > 0) {
+	            if (targetlink[0].hits < targetlink[0].hitsMax) {
+	                if (creep.repair(targetlink[0]) == ERR_NOT_IN_RANGE) {
+	                    creep.moveTo(targetlink[0]);
 	                }
 	            }
                 else if(creep.transfer(targetlink, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
