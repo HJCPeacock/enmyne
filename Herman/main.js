@@ -106,7 +106,7 @@ module.exports.loop = function () {
             filter: (structure) => {
 	                return structure.structureType == STRUCTURE_LINK;
         }
-        }).length > 1) return 0;
+        }).length < 2) return 0;
         return 1;
     }
 
