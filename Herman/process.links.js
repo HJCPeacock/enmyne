@@ -2,7 +2,7 @@ var processLinks = {
     run: function (room) {
 
         //room E51N1
-        if (room != 'E51N1') return;
+        if (room.name != 'E51N1') return;
         if (!Game.spawns.Spawn1) return;
 
         //at source 1
