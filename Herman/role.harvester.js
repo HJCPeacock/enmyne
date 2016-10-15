@@ -26,8 +26,15 @@ var roleHarvester = {
                     filter: (structure) => {
                         return ((structure.structureType == STRUCTURE_LINK && structure.energyCapacity) || (structure.structureType == STRUCTURE_CONTAINER && structure.storeCapacitynumber));
                     }
-            });
-	        if (targetlink.length > 0) {
+	        });
+
+	        var hasLinks = creep.room.find(FIND_STRUCTURES, {
+	            filter: (structure) => {
+	                return structure.structureType == STRUCTURE_LINK;
+	            }
+	        }).length > 1;
+
+	        if (targetlink.length > 0 && hasLinks) {
 	            if (targetlink[0].hits < targetlink[0].hitsMax) {
 	                if (creep.repair(targetlink[0]) == ERR_NOT_IN_RANGE) {
 	                    creep.moveTo(targetlink[0]);
