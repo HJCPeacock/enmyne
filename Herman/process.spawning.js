@@ -111,7 +111,7 @@ var processSpawning = {
                 if (spawn.canCreateCreep(moverBody, undefined) == OK) {
                     var desRoom = setMoverRoom();
                     var inHouse = setInhouse(desRoom);
-                    if ((inHouse && !hasContainer) || (!inHouse && room.name == 'E51N3')) return;
+                    if (!inHouse && room.name == 'E51N3') return;
                     var newName = spawn.createCreep(moverBody, undefined, { role: 'mover', room: desRoom, inHouse: inHouse });
                     console.log('Spawning new mover: ' + newName);
                 }
@@ -137,8 +137,8 @@ var processSpawning = {
         function setMoverRoom() {
             if (_.filter(movers, (creep) => creep.memory.room == 'E51N2').length < 2) return 'E51N2';
             if (_.filter(movers, (creep) => creep.memory.room == 'E52N1').length < 2) return 'E52N1';
-            if (_.filter(movers, (creep) => creep.memory.room == 'E51N3').length == 0) return 'E51N3';
-            if (_.filter(movers, (creep) => creep.memory.room == 'E51N1').length == 0) return 'E51N1';
+            if (_.filter(movers, (creep) => creep.memory.room == 'E51N3').length == 0 && hasContainer) return 'E51N3';
+            if (_.filter(movers, (creep) => creep.memory.room == 'E51N1').length == 0 && hasContainer) return 'E51N1';
         }
 
         function setClaimRoom() {
