@@ -107,7 +107,7 @@ var processSpawning = {
                 }
                 return;
             }
-            else if (movers.length < 5) {
+            else if (movers.length < 4) {
                 if (spawn.canCreateCreep(moverBody, undefined) == OK) {
                     var desRoom = setMoverRoom();
                     var inHouse = setInhouse(desRoom);
