@@ -11,7 +11,7 @@ var processSpawning = {
             filter: (structure) => {
                 return structure.structureType == STRUCTURE_LINK;
             }
-        }) > 2;
+        }).length > 2;
 
         var hasStorage = !(room.storage == undefined);
 
