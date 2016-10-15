@@ -9,7 +9,7 @@ var roleCarrierJnr = {
                 }
             }
             else {
-                var source = Game.spawns.Spawn1.room.lookForAt('structure', 36, 24)[0];
+                var source = Game.spawns.Spawn1.room.lookForAt('structure', 17, 23)[0];
                 if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) creep.moveTo(source);
             }
         }
