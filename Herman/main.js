@@ -97,7 +97,7 @@ module.exports.loop = function () {
                 filter: (structure) => {
 	                return structure.structureType == STRUCTURE_LINK;
         }
-        }).length > 2) return 1;
+        }).length > 1) return 1;
         else return 0;
     }
 
@@ -106,7 +106,7 @@ module.exports.loop = function () {
             filter: (structure) => {
 	                return structure.structureType == STRUCTURE_LINK;
         }
-        }).length < 3) return 0;
+        }).length > 1) return 0;
         return 1;
     }
 
