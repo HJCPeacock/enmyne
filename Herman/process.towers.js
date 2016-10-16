@@ -30,11 +30,12 @@ var processTowers = {
                 if (structure.structureType == STRUCTURE_WALL || structure.structureType == STRUCTURE_RAMPART) {
                     if (Memory.repairHP[tower.room.name])
                     {
-                        if (Memory.repairHP[tower.room.name][structure.id] != undefined) {
+                        if (Memory.repairHP[tower.room.name][structure.id]) {
                             if (Memory.repairHP[tower.room.name][structure.id].hp < structure.hits) Memory.repairHP[tower.room.name][structure.id].hp = structure.hits;
                             else if (structure.hits < 2000 || structure.hits < Memory.repairHP[tower.room.name][structure.id].hp - 1000) return true;
                         } else {
-                            Memory.repairHP[tower.room.name] = { [structure.id] : {hp: structure.hits} };
+                            var structure_id = structure.id; 
+                            Memory.repairHP[tower.room.name] = { structure_id: { hp: structure.hits } };
                         }
                     } else {
                         Memory.repairHP[tower.room.name] = {};
