@@ -6,7 +6,8 @@ var roleRepair = {
 
         if (Memory.Ticks == 1)
         {
-            var highestHP = {id : 'id', hp: 0};
+            var highestHP = { id: 'id', hp: 0 };
+            var lowestHP = { id: 'id', hp: room_wallRampartHP };
             var wallRamparts = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return structure.structureType == STRUCTURE_RAMPART || structure.structureType == STRUCTURE_WALL;
@@ -22,15 +23,19 @@ var roleRepair = {
                         highestHP.hp = structure.hits;
                         highestHP.id = structure.id;
                     }
+                    if (structure.hits <= lowestHP.hp) {
+                        lowestHP.hp = structure.hits;
+                        lowestHP.id = structure.id;
+                    }
                 }
 
-                if (highestHP.hp >= Memory.repairHP[highestHP.id].hp) Memory.RoomsWallRampart[room].wallRampartHP = highestHP.hp + 10000;
+                if (lowestHP.hp >= highestHP.hp) Memory.RoomsWallRampart[room].wallRampartHP = highestHP.hp + 10000;
             }
 
             //Clearing Memory
             for (var objname in Memory.repairHP)
             {
-
+                //to do
             }
         }
         

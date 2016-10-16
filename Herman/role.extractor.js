@@ -1,7 +1,6 @@
 var roleExtractor = {
     run: function (creep) {
-
-        
+        //to do
     }
 };
 
