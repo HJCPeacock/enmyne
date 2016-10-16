@@ -29,13 +29,13 @@ var roleRepair = {
                     }
                 }
 
-                if (lowestHP.hp >= highestHP.hp) Memory.RoomsWallRampart[room].wallRampartHP = highestHP.hp + 10000;
+                if (lowestHP.hp >= highestHP.hp) Memory.RoomsWallRampart[room].wallRampartHP = highestHP.hp + 50000;
             }
 
             //Clearing Memory
-            for (var objname in Memory.repairHP)
+            for (var objname in Memory.repairHP[room])
             {
-                //to do
+                if (_.filter(wallRamparts, (x) => x.id == objname).length == 0) delete Memory.repairHP[room][objname];
             }
         }
         
