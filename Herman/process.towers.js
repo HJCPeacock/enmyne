@@ -34,8 +34,7 @@ var processTowers = {
                             if (Memory.repairHP[tower.room.name][structure.id].hp < structure.hits) Memory.repairHP[tower.room.name][structure.id].hp = structure.hits;
                             else if (structure.hits < 2000 || structure.hits < Memory.repairHP[tower.room.name][structure.id].hp - 1000) return true;
                         } else {
-                            var structure_id = structure.id; 
-                            Memory.repairHP[tower.room.name] = { structure_id: { hp: structure.hits } };
+                            Memory.repairHP[tower.room.name][structure.id] = { hp: structure.hits };
                         }
                     } else {
                         Memory.repairHP[tower.room.name] = {};
