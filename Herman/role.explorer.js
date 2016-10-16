@@ -1,5 +1,7 @@
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
+var roleClaim = require('role.claim');
+var roleAttack = require('role.attack');
 
 var roleExplorer = {
     run: function (creep) {
@@ -28,11 +30,10 @@ var roleExplorer = {
                 roleBuilder.run(creep);
             }
             else if (creep.memory.claim != undefined) {
-                if (creep.room.controller) {
-                    if (creep.claimController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(creep.room.controller);
-                    }
-                }
+                roleClaim.run(creep);
+            }
+            else if (creep.memory.attack != undefined) {
+                roleAttack.run(creep);
             }
         }
     }
