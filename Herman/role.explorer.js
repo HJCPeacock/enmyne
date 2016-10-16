@@ -5,8 +5,8 @@ var roleAttack = require('role.attack');
 
 var roleExplorer = {
     run: function (creep) {
-        if (creep.room.name != 'E52N1') {
-            var exitDir = Game.map.findExit(creep.room.name, 'E52N1');
+        if (creep.room.name != creep.memory.room) {
+            var exitDir = Game.map.findExit(creep.room.name, creep.memory.room);
             var Exit = creep.pos.findClosestByRange(exitDir);
             creep.moveTo(Exit);
         }
