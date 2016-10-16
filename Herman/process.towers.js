@@ -22,7 +22,7 @@ var processTowers = {
             else if(closestInjuredCreep) {
                 tower.heal(closestInjuredCreep);
             }
-            else if(closestDamagedStructure && tower.energy > 500) {
+            else if(closestDamagedStructure && tower.energy >= 500) {
                 tower.repair(closestDamagedStructure);
             }
 

@@ -27,7 +27,7 @@ var roleCarrier = {
         }
         else {
             var lowesttower = getTowerVolumes();
-            if (lowesttower < 500) {
+            if (lowesttower <= 500) {
                 var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return structure.structureType == STRUCTURE_TOWER && structure.energy == lowesttower;
