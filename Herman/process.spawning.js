@@ -63,13 +63,6 @@ var processSpawning = {
                 }
                 return;
             }
-            else if (upgraders.length < upgraderLimit) {
-                if (spawn.canCreateCreep(upgraderBody, undefined) == OK) {
-                    var newName = spawn.createCreep(upgraderBody, undefined, { role: 'upgrader', upgrading: false });
-                    console.log('Spawning new upgrader: ' + newName);
-                }
-                return;
-            }
             else if (carrierJnrs.length < carrierJnrLimit) {
                 if (spawn.canCreateCreep(carrierJnrBody, undefined) == OK) {
                     var newName = spawn.createCreep(carrierJnrBody, undefined, { role: 'carrierjnr' });
@@ -81,6 +74,13 @@ var processSpawning = {
                 if (spawn.canCreateCreep(carrierBody, undefined) == OK) {
                     var newName = spawn.createCreep(carrierBody, undefined, { role: 'carrier', harvesting: true });
                     console.log('Spawning new carrier: ' + newName);
+                }
+                return;
+            }
+            else if (upgraders.length < upgraderLimit) {
+                if (spawn.canCreateCreep(upgraderBody, undefined) == OK) {
+                    var newName = spawn.createCreep(upgraderBody, undefined, { role: 'upgrader', upgrading: false });
+                    console.log('Spawning new upgrader: ' + newName);
                 }
                 return;
             }

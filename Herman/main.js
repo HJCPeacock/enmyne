@@ -17,7 +17,7 @@ module.exports.loop = function () {
     //All Rooms
 
     //Global Time
-    if (Memory.Ticks == 0) Memory.Ticks = 40;
+    if (Memory.Ticks == 0) Memory.Ticks = 50;
     Memory.Ticks--;
 
     for (var name in Memory.creeps) {
@@ -119,17 +119,4 @@ module.exports.loop = function () {
         if (room.name == 'E51N3') return 1;
         return 0;
     }
-
-    //clear objects from memory
-    //var removeObjects = Game.rooms['E51N1'].find(FIND_STRUCTURES, {
-    //    filter: (structure) => {
-    //        return structure.structureType == STRUCTURE_WALL || structure.structureType == STRUCTURE_RAMPART;
-    //    }
-    //});
-    //for (var objname in removeObjects) {
-    //    var obj = removeObjects[objname];
-    //    if (!Memory.repairHP[obj.id]) {
-    //        delete Memory.repairHP[obj.id];
-    //    }
-    //}
 }
