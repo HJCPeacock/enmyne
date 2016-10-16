@@ -17,7 +17,8 @@ module.exports.loop = function () {
     //All Rooms
 
     //Global Time
-
+    if (Memory.Ticks == 0) Memory.Ticks = 40;
+    Memory.Ticks--;
 
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
