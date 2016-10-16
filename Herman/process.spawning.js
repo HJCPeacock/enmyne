@@ -202,7 +202,7 @@ var processSpawning = {
         function buildCarrierBody()
         {
             //based on roads
-            if (roomCreeps.length < 4 || room.energyAvailable < 500)
+            if (roomCreeps.length < 4 || room.energyAvailable < 900)
                 return [CARRY, CARRY, MOVE, CARRY, CARRY, MOVE];
             if (room.energyCapacityAvailable >= 900)
                 return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];//12 - 12 = 0
