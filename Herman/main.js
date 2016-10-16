@@ -16,6 +16,9 @@ module.exports.loop = function () {
 
     //All Rooms
 
+    //Global Time
+
+
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
             delete Memory.creeps[name];
@@ -59,7 +62,7 @@ module.exports.loop = function () {
     }
     
     var myRooms = Game.rooms
-    for (var name in myRooms )
+    for (var name in myRooms)
     {
         var room = myRooms[name];
         
