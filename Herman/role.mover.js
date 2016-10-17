@@ -16,6 +16,9 @@ var roleMover = {
                         if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(source);
                         }
+                    } else {
+                        var sources = creep.room.find(FIND_SOURCES);
+                        creep.moveTo(sources[0]);
                     }
                 }
             }
