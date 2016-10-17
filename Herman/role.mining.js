@@ -32,7 +32,7 @@ var roleMining = {
                         return structure.structureType == STRUCTURE_CONTAINER;
                     }
                 });
-                if (target.hits < target.hitsMax) {
+                if (target.hits && target.hits < target.hitsMax) {
                     if (creep.repair(target) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target);
                     }
