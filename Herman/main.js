@@ -80,7 +80,7 @@ module.exports.loop = function () {
         //towers
         var towers = room.find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
         for (var towerCounter = 0; towerCounter < towers.length; towerCounter++) {
-            processTowers.run(towers[towerCounter]);
+            processTowers.run(towers[towerCounter], calculateHostiles(towers[0]));
         }
     }
 
@@ -118,5 +118,10 @@ module.exports.loop = function () {
         if (room.name == 'E51N1') return 1;
         if (room.name == 'E51N3') return 1;
         return 0;
+    }
+
+    function calculateHostiles(tower)
+    {
+        return hostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
     }
 }

@@ -1,8 +1,7 @@
 var processTowers = {
     run: function(tower) {
-        if (tower) {
-            var hostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-            var canAttack = Memory.TowerAttackDamage[tower.room.name] && Memory.TowerAttackDamage[tower.room.name].hp ? true : false;
+        if (tower, hostile) {
+            
             
             var closestInjuredCreep = tower.pos.findClosestByRange(FIND_MY_CREEPS, {
                 filter: (injuredCreep) => injuredCreep.hits < injuredCreep.hitsMax
@@ -19,16 +18,16 @@ var processTowers = {
 
             if ((Memory.Ticks == 10 || Memory.Ticks == 20 || Memory.Ticks == 30 || Memory.Ticks == 40) && hostile)
             {
-                if (!Memory.TowerAttackDamage[tower.room.name]) Memory.TowerAttackDamage[tower.room.name] = {};
-                canAttack = true;
+                tower.attack(hostile);
             }
 
             if (!hostile && Memory.TowerAttackDamage[tower.room.name] && Memory.TowerAttackDamage[tower.room.name].hp) Memory.TowerAttackDamage[tower.room.name] = {}
             
-            if (hostile && canAttack) {
-                tower.attack(hostile);
-                Memory.TowerAttackDamage[tower.room.name] = { hp: hostile.hits };
-                if (hostile.hits >= Memory.TowerAttackDamage[tower.room.name].hp) Memory.TowerAttackDamage[tower.room.name] = {}
+            if (hostile) {
+                if (!Memory.TowerAttackDamage[tower.room.name]) Memory.TowerAttackDamage[tower.room.name] = {};
+                if (!Memory.TowerAttackDamage[tower.room.name].hp) Memory.TowerAttackDamage[tower.room.name] = { hp: hostile.hits };
+                if (hostile.hits < Memory.TowerAttackDamage[tower.room.name].hp) tower.attack(hostile);
+                if (hostile.hits < Memory.TowerAttackDamage[tower.room.name].hp) Memory.TowerAttackDamage[tower.room.name] = { hp: hostile.hits };
             }
             else if(closestInjuredCreep) {
                 tower.heal(closestInjuredCreep);
