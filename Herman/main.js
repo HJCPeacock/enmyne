@@ -86,7 +86,7 @@ module.exports.loop = function () {
 
     function calculateUpgraderCount(room) {
         if (!room.storage) return 3;
-        return Math.ceil(room.storage.store[RESOURCE_ENERGY] / 10000);
+        return Math.ceil(room.storage.store[RESOURCE_ENERGY] / 25000);
     }
 
     function calculateAttackerCount(room) {
