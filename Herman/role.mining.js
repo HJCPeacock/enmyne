@@ -42,6 +42,15 @@ var roleMining = {
                         creep.moveTo(target);
                     }
                 }
+                else if (!target)
+                {
+                    var building = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
+                    if (building) {
+                        if (creep.build(building) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(building);
+                        }
+                    }
+                }
             }
         }
     }
