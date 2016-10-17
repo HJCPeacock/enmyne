@@ -20,14 +20,15 @@ var processTowers = {
             if ((Memory.Ticks == 15 || Memory.Ticks == 30 || Memory.Ticks == 45) && hostile)
             {
                 if (!Memory.TowerAttackDamage[tower.room.name]) Memory.TowerAttackDamage[tower.room.name] = {};
-                if (!Memory.TowerAttackDamage[tower.room.name].hp) Memory.TowerAttackDamage[tower.room.name] = { hp: hostile.hits };
-                if (hostile.hits <= Memory.TowerAttackDamage[tower.room.name].hp) canAttack = true;
+                canAttack = true;
             }
 
             if (!hostile && Memory.TowerAttackDamage[tower.room.name] && Memory.TowerAttackDamage[tower.room.name].hp) Memory.TowerAttackDamage[tower.room.name] = {}
             
             if (hostile && canAttack) {
+                if (!Memory.TowerAttackDamage[tower.room.name].hp) Memory.TowerAttackDamage[tower.room.name] = { hp: hostile.hits };
                 tower.attack(hostile);
+                if (hostile.hits >= Memory.TowerAttackDamage[tower.room.name].hp) Memory.TowerAttackDamage[tower.room.name] = {};
             }
             else if(closestInjuredCreep) {
                 tower.heal(closestInjuredCreep);
