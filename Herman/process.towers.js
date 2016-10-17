@@ -1,7 +1,7 @@
 var processTowers = {
     run: function(tower) {
-        if (tower, hostile) {
-            
+        if (tower) {
+            var hostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
             
             var closestInjuredCreep = tower.pos.findClosestByRange(FIND_MY_CREEPS, {
                 filter: (injuredCreep) => injuredCreep.hits < injuredCreep.hitsMax
