@@ -50,7 +50,7 @@ var roleRepair = {
                             (structure.structureType == STRUCTURE_TOWER && structure.hits < structure.hitsMax) ||
                             (structure.structureType == STRUCTURE_STORAGE && structure.hits < structure.hitsMax) ||
                             (structure.structureType == STRUCTURE_WALL && structure.hits < room_wallRampartHP) ||
-                            (structure.structureType == STRUCTURE_ROAD && structure.hits < structure.hitsMax)
+                            (structure.structureType == STRUCTURE_ROAD && structure.hits < structure.hitsMax - 400)
                             );
                 }
 	    });
