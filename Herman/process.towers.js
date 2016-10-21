@@ -39,8 +39,8 @@ var processTowers = {
         }
                
         //Repair
-        if (closestDamagedStructure.length > 0 && tower.energy >= 500) {
-            towers.forEach(tower => tower.repair(closestDamagedStructure[0]));
+        if (closestDamagedStructure.length > 0) {
+            towers.forEach(tower => tower.energy >= 500 && tower.repair(closestDamagedStructure[0]));
         }
 
         function closestwWallRmpart(structure) {
