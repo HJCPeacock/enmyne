@@ -16,34 +16,31 @@ var processTowers = {
         });
 
         var towers = room.find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
-        for (var towername in towers) {
-            var tower = towers[towername];
+        
+        var hostile = hostiles.length > 0 ? towers[0].pos.findClosestByRange(hostiles) : null;
 
-            var hostile = hostiles.length > 0 ? tower.pos.findClosestByRange(hostiles) : null;
+        //Attack
+        if ((Memory.Ticks == 10 || Memory.Ticks == 20 || Memory.Ticks == 30 || Memory.Ticks == 40) && hostile) {
+            towers.forEach(tower => tower.attack(hostile));
+        }
 
-            //Attack
-            if ((Memory.Ticks == 10 || Memory.Ticks == 20 || Memory.Ticks == 30 || Memory.Ticks == 40) && hostile) {
-                tower.attack(hostile);
-            }
+        if (!hostile && Memory.TowerAttackDamage[room.name] && Memory.TowerAttackDamage[room.name].hp) Memory.TowerAttackDamage[room.name] = {}
 
-            if (!hostile && Memory.TowerAttackDamage[room.name] && Memory.TowerAttackDamage[room.name].hp) Memory.TowerAttackDamage[room.name] = {}
+        if (hostile) {
+            if (!Memory.TowerAttackDamage[room.name]) Memory.TowerAttackDamage[room.name] = {};
+            if (!Memory.TowerAttackDamage[room.name].hp) Memory.TowerAttackDamage[room.name] = { hp: hostile.hits };
+            if (hostile.hits < Memory.TowerAttackDamage[room.name].hp) towers.forEach(tower => tower.attack(hostile));
+            if (hostile.hits < Memory.TowerAttackDamage[room.name].hp) Memory.TowerAttackDamage[room.name] = { hp: hostile.hits };
+        }
 
-            if (hostile) {
-                if (!Memory.TowerAttackDamage[room.name]) Memory.TowerAttackDamage[room.name] = {};
-                if (!Memory.TowerAttackDamage[room.name].hp) Memory.TowerAttackDamage[room.name] = { hp: hostile.hits };
-                if (hostile.hits < Memory.TowerAttackDamage[room.name].hp) tower.attack(hostile);
-                if (hostile.hits < Memory.TowerAttackDamage[room.name].hp) Memory.TowerAttackDamage[room.name] = { hp: hostile.hits };
-            }
-
-            //Heal
-            if (closestInjuredCreep.length > 0) {
-                tower.heal(closestInjuredCreep[0]);
-            }
+        //Heal
+        if (closestInjuredCreep.length > 0) {
+            towers.forEach(tower => tower.heal(closestInjuredCreep[0]));
+        }
                
-            //Repair
-            if (closestDamagedStructure.length > 0 && tower.energy >= 500) {
-                tower.repair(closestDamagedStructure[0]);
-            }
+        //Repair
+        if (closestDamagedStructure.length > 0 && tower.energy >= 500) {
+            towers.forEach(tower => tower.repair(closestDamagedStructure[0]));
         }
 
         function closestwWallRmpart(structure) {
