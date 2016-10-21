@@ -41,7 +41,7 @@ var roleRepair = {
         
         var rampart = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {
-                return (structure.structureType == STRUCTURE_RAMPART && structure.hits < room_wallRampartHP);
+                return (structure.structureType == STRUCTURE_RAMPART && structure.hits < room_wallRampartHP - 400);
             }
         });
         var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
