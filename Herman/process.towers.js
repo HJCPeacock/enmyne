@@ -11,7 +11,7 @@ var processTowers = {
                 return closestwWallRmpart(structure) ||
                        ((structure.structureType == STRUCTURE_SPAWN ||
                         structure.structureType == STRUCTURE_TOWER ||
-                        structure.structureType == STRUCTURE_ROAD) && structure.hits < structure.hitsMax - 800);
+                        structure.structureType == STRUCTURE_ROAD) && structure.hits < structure.hitsMax - 400);
             }
         });
 
