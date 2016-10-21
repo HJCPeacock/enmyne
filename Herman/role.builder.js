@@ -35,13 +35,15 @@ var roleBuilder = {
 	                    return structure.structureType == STRUCTURE_STORAGE;
 	                }
 	            });
-	            if (sourceStorage && sourceStorage.store[RESOURCE_ENERGY] > 2000) {
+
+	            var source = creep.pos.findClosestByRange(FIND_SOURCES);
+
+	            if (sourceStorage && sourceStorage.store[RESOURCE_ENERGY] > 2000 && creep.pos.getRangeTo(sourceStorage) <= creep.pos.getRangeTo(source)) {
 	                if (creep.withdraw(sourceStorage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 	                    creep.moveTo(sourceStorage);
 	                }
 	            }
 	            else {
-	                var source = creep.pos.findClosestByRange(FIND_SOURCES);
 	                if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
 	                    creep.moveTo(source);
 	                }
