@@ -30,7 +30,7 @@ var processTowers = {
             if (hostile.hits < Memory.TowerAttackDamage[room.name].hp) towers.forEach(tower => tower.attack(hostile));
             Memory.TowerAttackDamage[room.name] = { hp: hostile.hits };
         }
-        else if (closestInjuredCreep.length > 0) {
+        if (closestInjuredCreep.length > 0) {
             towers.forEach(tower => tower.heal(closestInjuredCreep[0]));
         }
         else if (closestDamagedStructure.length > 0) {

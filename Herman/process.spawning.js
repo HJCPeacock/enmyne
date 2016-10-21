@@ -254,6 +254,8 @@ var processSpawning = {
         function buildAttackerBody()
         {
             //based on plain terain
+            if (room.energyCapacityAvailable >= 1470)
+                return [MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK];//14 - 14 = 0
             if (room.energyCapacityAvailable >= 1050)
                 return [MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK];//10 - 10 = 0
             if (room.energyCapacityAvailable >= 900)
