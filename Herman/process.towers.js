@@ -36,12 +36,14 @@ var processTowers = {
             }
 
             //Heal
-            if(closestInjuredCreep.length > 0) 
+            if (closestInjuredCreep.length > 0) {
                 tower.heal(closestInjuredCreep[0]);
-
+            }
+               
             //Repair
-            if(closestDamagedStructure.length > 0 && tower.energy >= 500)
+            if (closestDamagedStructure.length > 0 && tower.energy >= 500) {
                 tower.repair(closestDamagedStructure[0]);
+            }
         }
 
         function closestwWallRmpart(structure) {
