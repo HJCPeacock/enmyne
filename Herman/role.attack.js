@@ -1,11 +1,23 @@
 var roleAttack = {
     run: function (creep) {
+        var target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        var rampartPromise = creep.pos.lookFor(LOOK_STRUCTURES);
+        var isOnRampart = rampartPromise.length > 0 && _.filter(rampartPromise, (x) => x.structureType == STRUCTURE_RAMPART).length > 0;
+
+        //Heal
         var canHeal = _.filter(creep.body, (x) => x.type == 'heal').length > 0;
         if (canHeal && creep.hits < creep.hitsMax) creep.heal(creep);
 
-        var targets = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 22);
-        if(targets.length > 0) {
-            if (creep.rangedAttack(targets[0]) == ERR_NOT_IN_RANGE) creep.moveTo(targets[0]);
+        //Ranged Attack
+        var canRangedAttack = _.filter(creep.body, (x) => x.type == 'ranged_attack').length > 0;
+        if(target && canRangedAttack) {
+            if (creep.rangedAttack(target) == ERR_NOT_IN_RANGE && !isOnRampart) creep.moveTo(target);
+        }
+
+        //Attack
+        var canAttack = _.filter(creep.body, (x) => x.type == 'attack').length > 0;
+        if (target && canAttack) {
+            if (creep.attack(target) == ERR_NOT_IN_RANGE && !isOnRampart) creep.moveTo(target);
         }
 	}
 };

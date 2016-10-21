@@ -89,7 +89,7 @@ module.exports.loop = function () {
 
     function calculateAttackerCount(room) {
         if (room.name == 'E51N1' || room.name == 'E51N3') {
-            if (room.find(FIND_HOSTILE_CREEPS).length > 1) return 0;
+            if (room.find(FIND_HOSTILE_CREEPS).length > 1) return 1;
         }
     }
 
