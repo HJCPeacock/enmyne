@@ -78,10 +78,8 @@ module.exports.loop = function () {
         processLinks.run(room);
 
         //towers
-        var towers = room.find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
-        for (var towerCounter = 0; towerCounter < towers.length; towerCounter++) {
-            processTowers.run(towers[towerCounter]);
-        }
+        
+        processTowers.run(room);
     }
 
     function calculateUpgraderCount(room) {
