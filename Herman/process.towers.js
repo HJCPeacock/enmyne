@@ -1,12 +1,12 @@
 var processTowers = {
     run: function (room) {
-        var hostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        var hostiles = room.find(FIND_HOSTILE_CREEPS);
 
-        var closestInjuredCreep = tower.pos.findClosestByRange(FIND_MY_CREEPS, {
+        var closestInjuredCreep = room.find(FIND_MY_CREEPS, {
             filter: (injuredCreep) => injuredCreep.hits < injuredCreep.hitsMax
         });
 
-        var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+        var closestDamagedStructure = room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return closestwWallRmpart(structure) ||
                        ((structure.structureType == STRUCTURE_SPAWN ||
@@ -18,6 +18,8 @@ var processTowers = {
         var towers = room.find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
         for (var towername in towers) {
             var tower = towers[towername];
+
+            var hostile = hostiles.length > 0 ? tower.findClosestByRange(hostiles) : null;
 
             //Attack
             if ((Memory.Ticks == 10 || Memory.Ticks == 20 || Memory.Ticks == 30 || Memory.Ticks == 40) && hostile) {
@@ -34,12 +36,12 @@ var processTowers = {
             }
 
             //Heal
-            if(closestInjuredCreep) 
-                tower.heal(closestInjuredCreep);
+            if(closestInjuredCreep.length > 0) 
+                tower.heal(closestInjuredCreep[0]);
 
             //Repair
-            if(closestDamagedStructure && tower.energy >= 500)
-                tower.repair(closestDamagedStructure);
+            if(closestDamagedStructure.length > 0 && tower.energy >= 500)
+                tower.repair(closestDamagedStructure[0]);
         }
 
         function closestwWallRmpart(structure) {
