@@ -19,7 +19,7 @@ var processTowers = {
         for (var towername in towers) {
             var tower = towers[towername];
 
-            var hostile = hostiles.length > 0 ? tower.findClosestByRange(hostiles) : null;
+            var hostile = hostiles.length > 0 ? tower.pos.findClosestByRange(hostiles) : null;
 
             //Attack
             if ((Memory.Ticks == 10 || Memory.Ticks == 20 || Memory.Ticks == 30 || Memory.Ticks == 40) && hostile) {
