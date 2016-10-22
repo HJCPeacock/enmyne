@@ -30,6 +30,7 @@ var roleRepair = {
                 }
 
                 if (lowestHP.hp >= highestHP.hp - 1000) Memory.RoomsWallRampart[room].wallRampartHP = highestHP.hp + 50000;
+                else Memory.RoomsWallRampart[room].wallRampartHP = highestHP.hp;
             }
 
             //Clearing Memory
