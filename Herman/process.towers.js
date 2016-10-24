@@ -1,5 +1,8 @@
 var processTowers = {
     run: function (room) {
+        var towers = room.find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
+        if (towers.length == 0) return;
+
         var hostiles = room.find(FIND_HOSTILE_CREEPS);
 
         var closestInjuredCreep = room.find(FIND_MY_CREEPS, {
@@ -15,8 +18,6 @@ var processTowers = {
             }
         });
 
-        var towers = room.find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
-        
         var hostile = hostiles.length > 0 ? towers[0].pos.findClosestByRange(hostiles) : null;
 
         if ((Memory.Ticks == 10 || Memory.Ticks == 20 || Memory.Ticks == 30 || Memory.Ticks == 40) && hostile) {
