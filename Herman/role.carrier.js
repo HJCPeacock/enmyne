@@ -30,7 +30,7 @@ var roleCarrier = {
             if (lowesttower <= 500) {
                 var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return structure.structureType == STRUCTURE_TOWER && structure.energy == lowesttower;
+                        return structure.structureType == STRUCTURE_TOWER && structure.energy <= lowesttower;
                     }
                 });
                 if (target) {
@@ -43,8 +43,7 @@ var roleCarrier = {
                 var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||
-                                structure.structureType == STRUCTURE_SPAWN ||
-                                structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
+                                structure.structureType == STRUCTURE_SPAWN) && structure.energy < structure.energyCapacity;
                     }
                 });
                 if (target) {
@@ -52,7 +51,18 @@ var roleCarrier = {
                         creep.moveTo(target);
                     }
                 }
-                else creep.memory.harvesting = true;
+                else {
+                    var targetTower = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return structure.structureType == STRUCTURE_TOWER && structure.energy < structure.energyCapacity;
+                        }
+                    });
+                    if (targetTower) {
+                        if (creep.transfer(targetTower, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(targetTower);
+                        }
+                    } else creep.memory.harvesting = true;
+                }
             }
         }
 
