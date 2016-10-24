@@ -28,7 +28,7 @@ var processLinks = {
         if (room.name == 'E51N3') {
             if (!Game.spawns.Spawn2) return;
 
-            var linkFrom1 = Game.spawns.Spawn2.room.lookForAt('structure', 6, 10)[0];
+            var linkFrom1 = Game.spawns.Spawn2.room.lookForAt('structure', 10, 9)[0];
             var linkTo = Game.spawns.Spawn2.room.lookForAt('structure', 26, 37)[0];
             var linkFrom2 = Game.spawns.Spawn2.room.lookForAt('structure', 4, 16)[0];
 
