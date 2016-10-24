@@ -112,7 +112,7 @@ var processSpawning = {
                     var desRoom = setMoverRoom();
                     var inHouse = setInhouse(desRoom);
                     if (!inHouse && room.name == 'E51N3') return;
-                    var newName = spawn.createCreep(moverBody, undefined, { role: 'mover', room: desRoom, inHouse: inHouse });
+                    var newName = spawn.createCreep(moverBody, undefined, { role: 'mover', room: desRoom, inHouse: inHouse, flag: setFlag(desRoom) });
                     console.log('Spawning new mover: ' + newName);
                 }
                 return;
@@ -150,6 +150,11 @@ var processSpawning = {
             if (desRoom == 'E51N1') return true;
             if (desRoom == 'E51N3') return true;
             return false;
+        }
+
+        function setFlag(desRoom) {
+            if (desRoom == 'E51N2') return 'Flag1';
+            if (desRoom == 'E52N1') return 'Flag2';
         }
 
         function getSourceCount() {

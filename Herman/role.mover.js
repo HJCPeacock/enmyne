@@ -17,8 +17,7 @@ var roleMover = {
                             creep.moveTo(source);
                         }
                     } else {
-                        var sources = creep.room.find(FIND_SOURCES);
-                        creep.moveTo(sources[0]);
+                        creep.moveTo(Game.flags[creep.memory.flag]);
                     }
                 }
             }
