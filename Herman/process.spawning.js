@@ -95,7 +95,7 @@ var processSpawning = {
             else if (attackers.length < attackerLimit) {
                 if (spawn.canCreateCreep(attackerBody, undefined) == OK)
                 {
-                    var newName = spawn.createCreep(attackerBody, undefined, { role: 'attacker' });
+                    var newName = spawn.createCreep(attackerBody, undefined, { role: 'attacker', flag: setFlag(room.name) });
                     console.log('Spawning new attacker: ' + newName);
                 }
                 return;
@@ -155,6 +155,8 @@ var processSpawning = {
         function setFlag(desRoom) {
             if (desRoom == 'E51N2') return 'Flag1';
             if (desRoom == 'E52N1') return 'Flag2';
+            if (desRoom == 'E51N1') return 'Flag3';
+            if (desRoom == 'E51N3') return 'Flag4';
         }
 
         function getSourceCount() {
