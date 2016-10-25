@@ -30,7 +30,7 @@ var processLinks = {
 
             var linkFrom1 = Game.spawns.Spawn2.room.lookForAt('structure', 10, 9)[0];
             var linkTo = Game.spawns.Spawn2.room.lookForAt('structure', 26, 37)[0];
-            var linkFrom2 = Game.spawns.Spawn2.room.lookForAt('structure', 4, 16)[0];
+            var linkFrom2 = Game.spawns.Spawn2.room.lookForAt('structure', 5, 16)[0];
 
             //at source 1
             if (linkFrom1 != undefined && linkTo != undefined)
@@ -40,7 +40,8 @@ var processLinks = {
             }
 
             //at source 2
-            if (linkFrom2 != undefined && linkTo != undefined) {
+            if (linkFrom2 != undefined && linkTo != undefined)
+            {
                 if (linkFrom2 && linkFrom2.cooldown == 0 && linkTo.energyCapacity - linkTo.energy >= linkFrom2.energy && linkFrom2.energy >= 200)
                     linkFrom2.transferEnergy(linkTo);
             }
