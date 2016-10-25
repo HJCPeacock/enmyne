@@ -27,7 +27,7 @@ var roleMover = {
                     var Exit = creep.pos.findClosestByRange(exitDir);
 
                     var building = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
-                    var repairUnit = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    var repairUnits = creep.pos.findInRange(FIND_STRUCTURES, 3, {
                         filter: (structure) => {
                             return structure.structureType == STRUCTURE_ROAD && structure.hits < structure.hitsMax;
                         }
@@ -38,9 +38,9 @@ var roleMover = {
                             creep.moveTo(building);
                         }
                     }
-                    else if (repairUnit) {
-                        if (creep.repair(repairUnit) == ERR_NOT_IN_RANGE);
-                        creep.moveTo(repairUnit);
+                    else if (repairUnits.length > 0) {
+                        if (creep.repair(repairUnits[0]) == ERR_NOT_IN_RANGE);
+                        creep.moveTo(Exit);
                     }
                     else creep.moveTo(Exit);
                 } else {
