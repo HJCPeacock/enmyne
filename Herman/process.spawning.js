@@ -26,7 +26,7 @@ var processSpawning = {
         if (hasContainer || hasLinks) hervesterlimit = 2;
 
         var builders = _.filter(roomCreeps, (creep) => creep.memory.role == 'builder');
-        var harvesters = _.filter(roomCreeps, (creep) => creep.memory.role == 'harvester');
+        var harvesters = _.filter(roomCreeps, (creep) => creep.memory.role == 'harvester' && creep.ticksToLive > 50);
         var upgraders = _.filter(roomCreeps, (creep) => creep.memory.role == 'upgrader');
         var attackers = _.filter(roomCreeps, (creep) => creep.memory.role == 'attacker');
         var carrierJnrs = _.filter(roomCreeps, (creep) => creep.memory.role == 'carrierjnr');
