@@ -2,6 +2,7 @@ var processTowers = {
     run: function (room) {
         var towers = room.find(FIND_MY_STRUCTURES, { filter: (x) => x.structureType == STRUCTURE_TOWER });
         if (towers.length == 0) return;
+        var resume = false;
 
         var hostiles = room.find(FIND_HOSTILE_CREEPS);
 
@@ -32,13 +33,14 @@ var processTowers = {
         if (hostile) {
             if (!Memory.TowerAttackDamage[room.name]) Memory.TowerAttackDamage[room.name] = {};
             if (hostile.hits < Memory.TowerAttackDamage[room.name].hp) towers.forEach(tower => tower.attack(hostile));
+            else resume = true;
             Memory.TowerAttackDamage[room.name] = { hp: hostile.hits };
-        }
+        } else resume = true;
 
-        if (closestInjuredCreep.length > 0) {
+        if (closestInjuredCreep.length > 0 && resume) {
             towers.forEach(tower => tower.heal(closestInjuredCreep[0]));
         }
-        else if (closestDamagedStructure.length > 0) {
+        else if (closestDamagedStructure.length > 0 && resume) {
             towers.forEach(tower => tower.energy >= 500 && tower.repair(closestDamagedStructure[0]));
         }
 
