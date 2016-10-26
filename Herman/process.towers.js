@@ -16,6 +16,7 @@ var processTowers = {
                         structure.structureType == STRUCTURE_TOWER ||
                         structure.structureType == STRUCTURE_STORAGE ||
                         structure.structureType == STRUCTURE_LINK ||
+                        structure.structureType == STRUCTURE_TERMINAL ||
                         structure.structureType == STRUCTURE_ROAD) && structure.hits < structure.hitsMax - 400);
             }
         });
