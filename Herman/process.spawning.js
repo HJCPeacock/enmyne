@@ -31,6 +31,7 @@ var processSpawning = {
         var attackers = _.filter(roomCreeps, (creep) => creep.memory.role == 'attacker');
         var carrierJnrs = _.filter(roomCreeps, (creep) => creep.memory.role == 'carrierjnr');
         var carriers = _.filter(roomCreeps, (creep) => creep.memory.role == 'carrier');
+        var extactors = _.filter(roomCreeps, (creep) => creep.memory.role == 'extractor');
 
         var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
         var movers = _.filter(Game.creeps, (creep) => creep.memory.role == 'mover');
@@ -50,6 +51,7 @@ var processSpawning = {
         var claimerBody = [MOVE, CLAIM, CLAIM, MOVE];
         var minerBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE];
         var moverBody = [WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];
+        var extractorBody = [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];
 
         for (var name in spawns)
         {
@@ -124,6 +126,15 @@ var processSpawning = {
                 if (spawn.canCreateCreep(claimerBody, undefined) == OK) {
                     var newName = spawn.createCreep(claimerBody, undefined, { role: 'claim', room: claimRoom });
                     console.log('Spawning new claimer: ' + newName);
+                }
+                return;
+            }
+            else if (extactors.length < 1 && Memory.Ticks == 1 && room.terminal) {
+                var mineral = room.find(FIND_MINERALS);
+                if (mineral.mineralAmount < 50) return;
+                if (spawn.canCreateCreep(extractorBody, undefined) == OK) {
+                    var newName = spawn.createCreep(extractorBody, undefined, { role: 'extractor', harvesting: true });
+                    console.log('Spawning new miner: ' + newName);
                 }
                 return;
             }
