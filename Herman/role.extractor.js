@@ -1,12 +1,17 @@
 var roleExtractor = {
     run: function (creep) {
-        //store[RESOURCE_ENERGY]
         if (!creep.memory.harvesting && creep.carry.energy == 0) {
             creep.memory.harvesting = true;
         }
         if (creep.memory.harvesting && creep.carry.energy == creep.carryCapacity) {
             creep.memory.harvesting = false;
         }
+
+        var terminal = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+            filter: (structure) => {
+                return structure.structureType == STRUCTURE_TERMINAL;
+            }
+        });
 
         if (creep.memory.harvesting) {
             var targets = creep.pos.findInRange(FIND_DROPPED_ENERGY, 3);
@@ -16,23 +21,40 @@ var roleExtractor = {
                 }
             }
             else {
-                var source =  creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return structure.structureType == STRUCTURE_EXTRACTOR;
+                if (terminal.store[RESOURCE_ENERGY] > 10000)
+                {
+                    var extractor = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return structure.structureType == STRUCTURE_EXTRACTOR;
+                        }
+                    });
+                    if (creep.harvest(extractor) == ERR_NOT_IN_RANGE) creep.moveTo(extractor);
+                } else {
+                    var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return structure.structureType == STRUCTURE_STORAGE && structure.store[RESOURCE_ENERGY] >= creep.carryCapacity;
+                        }
+                    });
+                    if (source) {
+                        if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) creep.moveTo(source);
                     }
-                });
-                if (creep.harvest(source) == ERR_NOT_IN_RANGE) creep.moveTo(source);
+                }
             }
         }
         else {
-            var terminal = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return structure.structureType == STRUCTURE_TERMINAL;
+            if (terminal)
+            {
+                if (creep.carry[RESOURCE_ENERGY] > 0)
+                {
+                    if (creep.transfer(terminal, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(terminal);
+                    }
                 }
-            });
-            if (terminal && terminal) {
-                if (creep.transfer(terminal, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(terminal);
+                else if (creep.carry[RESOURCE_CATALYST])
+                {
+                    if (creep.transfer(terminal, RESOURCE_CATALYST) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(terminal);
+                    }
                 }
             }
         }

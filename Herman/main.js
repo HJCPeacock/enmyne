@@ -11,6 +11,7 @@ var roleClaim = require('role.claim');
 var roleMining = require('role.mining');
 var roleMover = require('role.mover');
 var roleExplorer = require('role.explorer');
+var roleExtractor = require('role.extractor');
 
 module.exports.loop = function () {
 
@@ -59,6 +60,9 @@ module.exports.loop = function () {
         }
         if (creep.memory.role == 'explorer') {
             roleExplorer.run(creep);
+        }
+        if (creep.memory.role == 'extractor') {
+            roleExtractor.run(creep);
         }
     }
     
