@@ -10,7 +10,7 @@ var roleExtractor = {
         var terminal = creep.room.terminal;
 
         if (creep.memory.harvesting) {
-            var targets = creep.pos.findInRange(FIND_DROPPED_ENERGY, 3);
+            var targets = creep.pos.findInRange(FIND_DROPPED_RESOURCES, 3);
             if (targets.length > 0) {
                 if (creep.pickup(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0]);
@@ -43,7 +43,7 @@ var roleExtractor = {
                         creep.moveTo(terminal);
                     }
                 }
-                else if (creep.carry[RESOURCE_CATALYST])
+                else if (creep.carry[RESOURCE_CATALYST] > 0)
                 {
                     if (creep.transfer(terminal, RESOURCE_CATALYST) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(terminal);
