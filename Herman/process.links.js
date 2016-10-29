@@ -6,7 +6,7 @@ var processLinks = {
             if (!Game.spawns.Spawn1) return;
 
             var linkFrom1 = Game.spawns.Spawn1.room.lookForAt('structure', 5, 11)[0];
-            var linkTo = Game.spawns.Spawn1.room.lookForAt('structure', 17, 23)[0];
+            var linkTo = Game.spawns.Spawn1.room.lookForAt('structure', 19, 23)[0];
             var linkFrom2 = Game.spawns.Spawn1.room.lookForAt('structure', 36, 16)[0];
 
             //at source 1
