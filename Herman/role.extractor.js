@@ -1,9 +1,9 @@
 var roleExtractor = {
     run: function (creep) {
-        if (!creep.memory.harvesting && (creep.carry.energy == 0 || creep.carry.x == 0)) {
+        if (!creep.memory.harvesting && (creep.carry.energy == 0 || creep.carry.X == 0)) {
             creep.memory.harvesting = true;
         }
-        if (creep.memory.harvesting && (creep.carry.energy == creep.carryCapacity || creep.carry.x == creep.carryCapacity)) {
+        if (creep.memory.harvesting && (creep.carry.energy == creep.carryCapacity || creep.carry.X == creep.carryCapacity)) {
             creep.memory.harvesting = false;
         }
 
@@ -37,13 +37,13 @@ var roleExtractor = {
         else {
             if (terminal)
             {
-                if (creep.carry[RESOURCE_ENERGY] > 0)
+                if (creep.carry.energy > 0)
                 {
                     if (creep.transfer(terminal, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(terminal);
                     }
                 }
-                else if (creep.carry[RESOURCE_CATALYST] > 0)
+                else if (creep.carry.X > 0)
                 {
                     if (creep.transfer(terminal, RESOURCE_CATALYST) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(terminal);
