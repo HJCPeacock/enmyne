@@ -7,11 +7,7 @@ var roleExtractor = {
             creep.memory.harvesting = false;
         }
 
-        var terminal = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => {
-                return structure.structureType == STRUCTURE_TERMINAL;
-            }
-        });
+        var terminal = creep.room.terminal;
 
         if (creep.memory.harvesting) {
             var targets = creep.pos.findInRange(FIND_DROPPED_ENERGY, 3);

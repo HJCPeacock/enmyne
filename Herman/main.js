@@ -1,12 +1,13 @@
+var processSpawning = require('process.spawning');
+var processTowers = require('process.towers');
+var processLinks = require('process.links');
+var processTerminal = require('process.terminal');
 var roleHarvester = require('role.harvester');
 var roleCarrierJnr = require('role.carrierjnr');
 var roleCarrier = require('role.carrier');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleAttacker = require('role.attack');
-var processSpawning = require('process.spawning');
-var processTowers = require('process.towers');
-var processLinks = require('process.links');
 var roleClaim = require('role.claim');
 var roleMining = require('role.mining');
 var roleMover = require('role.mover');
@@ -82,8 +83,10 @@ module.exports.loop = function () {
         processLinks.run(room);
 
         //towers
-        
         processTowers.run(room);
+
+        //Terminals
+        processTerminal.run(room);
     }
 
     function calculateUpgraderCount(room) {
