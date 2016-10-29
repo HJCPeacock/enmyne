@@ -1,7 +1,7 @@
 var processSpawning = require('process.spawning');
 var processTowers = require('process.towers');
 var processLinks = require('process.links');
-//var processTerminal = require('process.terminal');
+var processTerminal = require('process.terminal');
 var roleHarvester = require('role.harvester');
 var roleCarrierJnr = require('role.carrierjnr');
 var roleCarrier = require('role.carrier');
@@ -86,7 +86,7 @@ module.exports.loop = function () {
         processTowers.run(room);
 
         //Terminals
-        //processTerminal.run(room);
+        processTerminal.run(room);
     }
 
     function calculateUpgraderCount(room) {
