@@ -134,7 +134,7 @@ var processSpawning = {
                 if (mineral.mineralAmount < 50) return;
                 if (spawn.canCreateCreep(extractorBody, undefined) == OK) {
                     var newName = spawn.createCreep(extractorBody, undefined, { role: 'extractor', harvesting: true });
-                    console.log('Spawning new miner: ' + newName);
+                    console.log('Spawning new extractor: ' + newName);
                 }
                 return;
             }
