@@ -14,7 +14,9 @@ var roleExplorer = {
             if (creep.memory.dismantel != undefined) {
                 var targetlink = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return structure.structureType == STRUCTURE_CONTAINER;
+                        return structure.structureType == STRUCTURE_CONTAINER ||
+                            structure.structureType == STRUCTURE_SPAWN ||
+                            structure.structureType == STRUCTURE_EXTENSION;
                     }
                 });
                 if (targetlink) {
