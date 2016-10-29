@@ -130,8 +130,8 @@ var processSpawning = {
                 return;
             }
             else if (extactors.length < 1 && Memory.Ticks == 1 && room.terminal) {
-                var mineral = room.find(FIND_MINERALS);
-                if (mineral.mineralAmount < 50) return;
+                var minerals = room.find(FIND_MINERALS);
+                if (minerals[0].mineralAmount < 50) return;
                 if (spawn.canCreateCreep(extractorBody, undefined) == OK) {
                     var newName = spawn.createCreep(extractorBody, undefined, { role: 'extractor', harvesting: true });
                     console.log('Spawning new extractor: ' + newName);
