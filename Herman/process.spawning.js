@@ -193,7 +193,7 @@ var processSpawning = {
         function buildHarvesterBody()
         {
             //based on roads
-            if (roomCreeps.length <= 2) return [WORK, CARRY, CARRY, MOVE, MOVE];
+            if (roomCreeps.length <= 2 || carriers.length == 0) return [WORK, CARRY, CARRY, MOVE, MOVE];
             if (room.energyCapacityAvailable >= 850 && hasLinks && hasStorage)
                 return [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
             if (room.energyCapacityAvailable >= 800 && (!hasLinks || !hasStorage))
