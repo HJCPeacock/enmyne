@@ -19,12 +19,9 @@ var roleExtractor = {
             else {
                 if (terminal.store[RESOURCE_ENERGY] > 10000)
                 {
-                    var extractor = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                        filter: (structure) => {
-                            return structure.structureType == STRUCTURE_EXTRACTOR;
-                        }
-                    });
-                    if (creep.harvest(extractor) == ERR_NOT_IN_RANGE) creep.moveTo(extractor);
+                    var miniral = creep.pos.findClosestByRange(FIND_MINERALS);
+                    if (creep.harvest(miniral) == ERR_NOT_IN_RANGE) creep.moveTo(miniral);
+
                 } else {
                     var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                         filter: (structure) => {
