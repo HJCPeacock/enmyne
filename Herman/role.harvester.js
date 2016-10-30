@@ -22,20 +22,20 @@ var roleHarvester = {
 	        }
         }
         else {
-	        var targetlink = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+	        var targetlinks = creep.pos.findInRange(FIND_STRUCTURES, 3, {
 	            filter: (structure) => {
 	                return structure.structureType == STRUCTURE_LINK || structure.structureType == STRUCTURE_CONTAINER;
 	            }
 	        });
 
-	        if (targetlink) {
-	            if (targetlink.hits < targetlink.hitsMax) {
-	                if (creep.repair(targetlink) == ERR_NOT_IN_RANGE) {
-	                    creep.moveTo(targetlink);
+	        if (targetlinks.length > 0) {
+	            if (targetlinks[0].hits < targetlinks[0].hitsMax) {
+	                if (creep.repair(targetlinks[0]) == ERR_NOT_IN_RANGE) {
+	                    creep.moveTo(targetlinks[0]);
 	                }
 	            }
-	            else if (creep.transfer(targetlink, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-	                creep.moveTo(targetlink);
+	            else if (creep.transfer(targetlinks[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+	                creep.moveTo(targetlinks[0]);
 	            }
 	        }
 	        else {
