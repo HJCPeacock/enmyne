@@ -47,7 +47,7 @@ var processSpawning = {
         var upgraderBody = buildUpgraderBody();
         var attackerBody = buildAttackerBody();
         var claimerBody = [MOVE, CLAIM, CLAIM, MOVE];
-        var minerBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE];
+        var minerBody = [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];
         var moverBody = [WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];
         var extractorBody = [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
 
@@ -129,7 +129,7 @@ var processSpawning = {
             }
             else if (extactors.length < 1 && Memory.Ticks == 1 && room.terminal) {
                 var minerals = room.find(FIND_MINERALS);
-                if (minerals[0].mineralAmount < 50) return;
+                if (minerals[0].mineralAmount == 0) return;
                 if (spawn.canCreateCreep(extractorBody, undefined) == OK) {
                     var newName = spawn.createCreep(extractorBody, undefined, { role: 'extractor', harvesting: true });
                     console.log('Spawning new extractor: ' + newName);
@@ -141,6 +141,14 @@ var processSpawning = {
         function setMinerRoom() {
             if (_.filter(miners, (creep) => creep.memory.room == 'E51N2').length == 0) return 'E51N2';
             if (_.filter(miners, (creep) => creep.memory.room == 'E52N1').length == 0) return 'E52N1';
+        }
+
+        function setMinerSpawn() {
+
+        }
+
+        function setMinerLimit() {
+
         }
 
         function setMoverRoom() {

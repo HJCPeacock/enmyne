@@ -22,9 +22,19 @@ var roleUpgrader = {
 	                creep.moveTo(sourceStorage);
 	            }
 	        } else {
-	            var source = creep.pos.findClosestByRange(FIND_SOURCES);
-	            if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-	                creep.moveTo(source);
+	            var sourceContainer = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+	                filter: (structure) => {
+	                    return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > creep.carryCapacity;
+	                }
+	            });
+	            if (sourceContainer)
+	            {
+	                if (creep.withdraw(sourceContainer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+	                    creep.moveTo(sourceContainer);
+	                }
+	            } else {
+	                var source = creep.pos.findClosestByRange(FIND_SOURCES);
+	                if (creep.harvest(source) == ERR_NOT_IN_RANGE) creep.moveTo(source);
 	            }
 	        }
         }
