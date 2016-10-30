@@ -49,7 +49,7 @@ var processSpawning = {
         var claimerBody = [MOVE, CLAIM, CLAIM, MOVE];
         var minerBody = [WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE];
         var moverBody = [WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];
-        var extractorBody = [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];
+        var extractorBody = [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
 
         for (var name in spawns)
         {

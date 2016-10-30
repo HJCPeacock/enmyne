@@ -3,7 +3,7 @@ var roleExtractor = {
         if (!creep.memory.harvesting && _.sum(creep.carry) == 0) {
             creep.memory.harvesting = true;
         }
-        if (creep.memory.harvesting && _.sum(creep.carry) == creep.carryCapacity) {
+        if (creep.memory.harvesting && (creep.carry.energy == creep.carryCapacity || creep.carry.X >= 50)) {
             creep.memory.harvesting = false;
         }
 
