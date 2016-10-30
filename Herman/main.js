@@ -77,7 +77,7 @@ module.exports.loop = function () {
 
         //spawning
         //params: Room, builders, harvesters, upgraders, attackers, carriers, carriersjnr
-        processSpawning.run(room, 1, 4, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
+        processSpawning.run(room, calculateBuilderCount(room), 2, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
 
         //Links
         processLinks.run(room);
@@ -116,5 +116,12 @@ module.exports.loop = function () {
         }
         }).length < 2) return 0;
         return 1;
+    }
+
+    function calculateBuilderCount(room) {
+        if (room.name == 'E51N1') return 1;
+        if (room.name == 'E51N3') return 1;
+        if (room.name == 'E53N3') return 3;
+        return 0;
     }
 }
