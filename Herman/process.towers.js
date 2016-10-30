@@ -26,6 +26,7 @@ var processTowers = {
 
         if ((Memory.Ticks == 10 || Memory.Ticks == 20 || Memory.Ticks == 30 || Memory.Ticks == 40) && hostile) {
             towers.forEach(tower => tower.attack(hostile));
+            return;
         }
 
         if (!hostile && Memory.TowerAttackDamage[room.name] && Memory.TowerAttackDamage[room.name].hp) Memory.TowerAttackDamage[room.name] = {}
