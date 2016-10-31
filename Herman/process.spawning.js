@@ -85,19 +85,18 @@ var processSpawning = {
                 }
                 return;
             }
-            else if (builders.length < builderLimit) {
-                if (spawn.canCreateCreep(builderBody, undefined) == OK)
-                {
-                    var newName = spawn.createCreep(builderBody, undefined, { role: 'builder', building: false });
-                    console.log('Spawning new builder: ' + newName);
-                }
-                return;
-            }
             else if (attackers.length < attackerLimit) {
                 if (spawn.canCreateCreep(attackerBody, undefined) == OK)
                 {
                     var newName = spawn.createCreep(attackerBody, undefined, { role: 'attacker', flag: setFlag(room.name) });
                     console.log('Spawning new attacker: ' + newName);
+                }
+                return;
+            }
+            else if (builders.length < builderLimit && roomCreeps.length > 3) {
+                if (spawn.canCreateCreep(builderBody, undefined) == OK) {
+                    var newName = spawn.createCreep(builderBody, undefined, { role: 'builder', building: false });
+                    console.log('Spawning new builder: ' + newName);
                 }
                 return;
             }
