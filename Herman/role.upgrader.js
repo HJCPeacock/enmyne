@@ -32,9 +32,6 @@ var roleUpgrader = {
 	                if (creep.withdraw(sourceContainer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 	                    creep.moveTo(sourceContainer);
 	                }
-	            } else {
-	                var source = creep.pos.findClosestByRange(FIND_SOURCES);
-	                if (creep.harvest(source) == ERR_NOT_IN_RANGE) creep.moveTo(source);
 	            }
 	        }
         }
