@@ -283,18 +283,18 @@ var processSpawning = {
         function buildAttackerBody()
         {
             //based on plain terain
-            if (room.energyCapacityAvailable >= 1470)
-                return [MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK];//14 - 14 = 0
-            if (room.energyCapacityAvailable >= 1050)
-                return [MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK];//10 - 10 = 0
-            if (room.energyCapacityAvailable >= 900)
-                return [MOVE, MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, HEAL];//8 - 8 = 0
-            if (room.energyCapacityAvailable >= 700)
-                return [MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, HEAL];//6 - 6 = 0
-            if (room.energyCapacityAvailable >= 400)
-                return [MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK];//4 - 4 = 0
-            if (room.energyCapacityAvailable >= 300)
-                return [MOVE, RANGED_ATTACK];//2 - 2 = 0
+            if (room.energyCapacityAvailable >= 1820)
+                return [MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK];//14 - 14 = 0
+            if (room.energyCapacityAvailable >= 1300)
+                return [MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK];//10 - 10 = 0
+            if (room.energyCapacityAvailable >= 1040)
+                return [MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK];//8 - 8 = 0
+            if (room.energyCapacityAvailable >= 780)
+                return [MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK];//6 - 6 = 0
+            if (room.energyCapacityAvailable >= 520)
+                return [MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK];//4 - 4 = 0
+            if (room.energyCapacityAvailable >= 260)
+                return [MOVE, MOVE, ATTACK, ATTACK];//2 - 2 = 0
         }
 
         function buildMoverBody(inHouse)
