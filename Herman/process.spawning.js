@@ -50,7 +50,6 @@ var processSpawning = {
         var attackerBody = buildAttackerBody();
         var claimerBody = [MOVE, CLAIM, CLAIM, MOVE];
         var minerBody = [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];
-        var moverBody = [WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];
         var extractorBody = [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
 
         for (var name in spawns)
@@ -110,9 +109,10 @@ var processSpawning = {
                 return;
             }
             else if (_.filter(movers, (creep) => creep.memory.sourceroom == room.name).length < moverLimit) {
+                var desRoom = setMoverRoom();
+                var inHouse = setInhouse(desRoom);
+                var moverBody = buildMoverBody(inHouse);
                 if (spawn.canCreateCreep(moverBody, undefined) == OK) {
-                    var desRoom = setMoverRoom();
-                    var inHouse = setInhouse(desRoom);
                     var newName = spawn.createCreep(moverBody, undefined, { role: 'mover', room: desRoom, inHouse: inHouse, flag: setFlag(desRoom), source: getSourceCount(false), sourceroom: room.name });
                     console.log('Spawning new mover: ' + newName);
                 }
@@ -295,6 +295,24 @@ var processSpawning = {
                 return [MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK];//4 - 4 = 0
             if (room.energyCapacityAvailable >= 300)
                 return [MOVE, RANGED_ATTACK];//2 - 2 = 0
+        }
+
+        function buildMoverBody(inHouse)
+        {
+            //based on roads
+            if (inHouse)
+            {
+                if (room.energyCapacityAvailable >= 450 && hasContainer)
+                    return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
+               else
+                    return [CARRY, CARRY, CARRY, MOVE, MOVE];//3 - 4 = -1
+            } else
+            {
+                if (room.energyCapacityAvailable >= 700)
+                    return [WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
+                if (room.energyCapacityAvailable >= 350)
+                    return [WORK, CARRY, CARRY, CARRY, MOVE, MOVE];//4 - 4 = 0
+            }
         }
     }
 };
