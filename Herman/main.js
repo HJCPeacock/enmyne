@@ -125,4 +125,9 @@ module.exports.loop = function () {
         if (room.name == 'E53N3') return 2;
         return 0;
     }
+
+    //Things to check
+    //wallrampart lowest, highest repairlevel
+    //controller level
+    //cpu
 }
