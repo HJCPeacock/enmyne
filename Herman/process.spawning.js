@@ -301,7 +301,7 @@ var processSpawning = {
             //based on roads
             if (inHouse)
             {
-                if (room.energyCapacityAvailable >= 450 && hasContainer && roomCreeps.length > 2)
+                if (room.energyCapacityAvailable >= 450 && hasContainer && roomCreeps.length > 3)
                     return [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
                else
                     return [CARRY, CARRY, CARRY, MOVE, MOVE];//3 - 4 = -1
