@@ -65,18 +65,18 @@ var roleMover = {
                         creep.moveTo(targets[0]);
                     }
                 } else {
-                    var source = creep.pos.findInRange(FIND_STRUCTURES, 3, {
+                    var sources = creep.pos.findInRange(FIND_STRUCTURES, 3, {
                         filter: (structure) => {
                             return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= creep.carryCapacity;
                         }
                     });
-                    if (source) {
-                        if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(source);
+                    if (sources.length > 0) {
+                        if (creep.withdraw(sources[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(sources[0]);
                         }
                     } else {
-                        var sources = creep.room.find(FIND_SOURCES);
-                        creep.moveTo(sources[creep.memory.source]);
+                        var energySources = creep.room.find(FIND_SOURCES);
+                        creep.moveTo(energySources[creep.memory.source]);
                     }
                 }
             }
