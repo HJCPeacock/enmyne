@@ -1,11 +1,13 @@
 var processSpawning = {
-    run: function (room, builderLimit, hervesterlimit, upgraderLimit, attackerLimit, carrierLimit, carrierJnrLimit) {
+    run: function (room, builderLimit, hervesterlimit, upgraderLimit, attackerLimit, carrierLimit, carrierJnrLimit, moverLimit) {
 
         var spawns = room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return structure.structureType == STRUCTURE_SPAWN;
             }
         });
+
+        if (spawns.length == 0) return;
 
         var hasLinks = room.find(FIND_STRUCTURES, {
             filter: (structure) => {
@@ -58,7 +60,7 @@ var processSpawning = {
 
             if (harvesters.length < hervesterlimit) {
                 if (spawn.canCreateCreep(harvesterBody, undefined) == OK) {
-                    var newName = spawn.createCreep(harvesterBody, undefined, { role: 'harvester', harvesting: true, source: getSourceCount() });
+                    var newName = spawn.createCreep(harvesterBody, undefined, { role: 'harvester', harvesting: true, source: getSourceCount(true) });
                     console.log('Spawning new harvester: ' + newName);
                 }
                 return;
@@ -107,12 +109,11 @@ var processSpawning = {
                 }
                 return;
             }
-            else if (movers.length < 3) {
+            else if (_.filter(movers, (creep) => creep.memory.sourceroom == room.name).length < moverLimit) {
                 if (spawn.canCreateCreep(moverBody, undefined) == OK) {
                     var desRoom = setMoverRoom();
                     var inHouse = setInhouse(desRoom);
-                    if (!inHouse && room.name == 'E51N3') return;
-                    var newName = spawn.createCreep(moverBody, undefined, { role: 'mover', room: desRoom, inHouse: inHouse, flag: setFlag(desRoom) });
+                    var newName = spawn.createCreep(moverBody, undefined, { role: 'mover', room: desRoom, inHouse: inHouse, flag: setFlag(desRoom), source: getSourceCount(false), sourceroom: room.name });
                     console.log('Spawning new mover: ' + newName);
                 }
                 return;
@@ -156,6 +157,7 @@ var processSpawning = {
             if (_.filter(movers, (creep) => creep.memory.room == 'E52N1').length < 2) return 'E52N1';
             if (_.filter(movers, (creep) => creep.memory.room == 'E51N3').length < 2 && hasContainer) return 'E51N3';
             if (_.filter(movers, (creep) => creep.memory.room == 'E51N1').length < 2 && hasContainer) return 'E51N1';
+            if (_.filter(movers, (creep) => creep.memory.room == 'E53N3').length < 2 && hasContainer) return 'E53N3';
         }
 
         function setClaimRoom() {
@@ -166,6 +168,7 @@ var processSpawning = {
         function setInhouse(desRoom) {
             if (desRoom == 'E51N1') return true;
             if (desRoom == 'E51N3') return true;
+            if (desRoom == 'E53N3') return true;
             return false;
         }
 
@@ -174,15 +177,17 @@ var processSpawning = {
             if (desRoom == 'E52N1') return 'Flag2';
             if (desRoom == 'E51N1') return 'Flag3';
             if (desRoom == 'E51N3') return 'Flag4';
+            if (desRoom == 'E53N3') return 'Flag5';
         }
 
-        function getSourceCount() {
-            var res = _.filter(harvesters, (creep) => creep.memory.source == 0).length;
-            if (hervesterlimit > 2)
+        function getSourceCount(forHarvester) {
+            if (forHarvester)
             {
-                if (res < 2) return 0;
+                var res = _.filter(harvesters, (creep) => creep.memory.source == 0).length;
+                if (res == 0) return 0;
                 else return 1;
             } else {
+                var res = _.filter(movers, (creep) => creep.memory.source == 0).length;
                 if (res == 0) return 0;
                 else return 1;
             }

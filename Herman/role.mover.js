@@ -22,8 +22,8 @@ var roleMover = {
                 }
             }
             if (creep.carry.energy > 0) {
-                if (creep.room.name != 'E51N1') {
-                    var exitDir = Game.map.findExit(creep.room.name, 'E51N1');
+                if (creep.room.name != creep.memory.sourceroom) {
+                    var exitDir = Game.map.findExit(creep.room.name, creep.memory.sourceroom);
                     var Exit = creep.pos.findClosestByRange(exitDir);
 
                     var building = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
@@ -65,7 +65,7 @@ var roleMover = {
                         creep.moveTo(targets[0]);
                     }
                 } else {
-                    var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    var source = creep.pos.findInRange(FIND_STRUCTURES, 3, {
                         filter: (structure) => {
                             return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= creep.carryCapacity;
                         }
@@ -74,6 +74,9 @@ var roleMover = {
                         if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(source);
                         }
+                    } else {
+                        var sources = creep.room.find(FIND_SOURCES);
+                        creep.moveTo(sources[creep.memory.source]);
                     }
                 }
             }

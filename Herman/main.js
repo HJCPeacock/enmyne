@@ -76,8 +76,8 @@ module.exports.loop = function () {
         if ((room.name == 'E51N1' || room.name == 'E51N1') && room.find(FIND_MY_CREEPS).length < 2) Game.notify('O balls; screep count in room ' + room.name + ' = ' + room.find(FIND_MY_CREEPS).length);
 
         //spawning
-        //params: Room, builders, harvesters, upgraders, attackers, carriers, carriersjnr
-        processSpawning.run(room, calculateBuilderCount(room), 2, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room));
+        //params: Room, builders, harvesters, upgraders, attackers, carriers, carriersjnr, movers
+        processSpawning.run(room, calculateBuilderCount(room), 2, calculateUpgraderCount(room), calculateAttackerCount(room), calculateCarrierCount(room), calculateCarrierJnrCount(room), calculateMoverCount(room));
 
         //Links
         processLinks.run(room);
@@ -122,6 +122,12 @@ module.exports.loop = function () {
         if (room.name == 'E51N1') return 1;
         if (room.name == 'E51N3') return 1;
         if (room.name == 'E53N3') return 3;
+        return 0;
+    }
+
+    function calculateMoverCount(room) {
+        if (room.name == 'E51N1') return 3;
+        if (room.name == 'E53N3') return 2;
         return 0;
     }
 }
