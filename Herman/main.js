@@ -90,7 +90,7 @@ module.exports.loop = function () {
     }
 
     function calculateUpgraderCount(room) {
-        if (!room.storage) return 3;
+        if (!room.storage) return 1;
         var devider = room.storage.store[RESOURCE_ENERGY] - 100000 > 0 ? room.storage.store[RESOURCE_ENERGY] - 100000 : 50000;
         return Math.ceil(devider / 50000);
     }
