@@ -101,12 +101,7 @@ module.exports.loop = function () {
 
     function calculateCarrierCount(room) {
         if (!room.storage) return 0;
-        else if (room.storage.store[RESOURCE_ENERGY] > 1000 && room.find(FIND_STRUCTURES, {
-                filter: (structure) => {
-	                return structure.structureType == STRUCTURE_LINK;
-        }
-        }).length > 1) return 1;
-        else return 0;
+        else return 1;
     }
 
     function calculateCarrierJnrCount(room) {
