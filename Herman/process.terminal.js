@@ -10,7 +10,7 @@ var processTerminal = {
             if (room.terminal.store[RESOURCE_ENERGY] >= 10000)
             {
                 var orders = Game.market.getAllOrders({ type: ORDER_BUY, resourceType: RESOURCE_CATALYST });
-                var feasibleOrders = _.filter(orders, (x) => Game.market.calcTransactionCost(x.amount, room.name, x.roomName) <= 10000 && x.price >= 0.9 && x.amount > 5000);
+                var feasibleOrders = _.filter(orders, (x) => Game.market.calcTransactionCost(x.amount, room.name, x.roomName) <= 10000 && x.price >= 0.9 && x.amount > 2000);
 
                 if (feasibleOrders.length > 0) feasibleOrders.forEach(feasibleOrder => marketDeal(feasibleOrder));
             }
