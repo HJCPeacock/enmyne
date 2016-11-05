@@ -186,7 +186,7 @@ var processSpawning = {
                 if (res == 0) return 0;
                 else return 1;
             } else {
-                var res = _.filter(movers, (creep) => creep.memory.source == 0).length;
+                var res = _.filter(movers, (creep) => creep.memory.source == 0 && creep.memory.inHouse).length;
                 if (res == 0) return 0;
                 else return 1;
             }
