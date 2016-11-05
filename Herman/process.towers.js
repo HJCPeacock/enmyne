@@ -25,7 +25,7 @@ var processTowers = {
         var hostile = hostiles.length > 0 ? towers[0].pos.findClosestByRange(hostiles) : null;
 
         if ((Memory.Ticks == 10 || Memory.Ticks == 20 || Memory.Ticks == 30 || Memory.Ticks == 40) && hostile) {
-            towers.forEach(tower => tower.attack(hostile));
+            if (hostile.owner != 'bldinator') towers.forEach(tower => tower.attack(hostile));
             return;
         }
 
@@ -33,7 +33,7 @@ var processTowers = {
 
         if (hostile) {
             if (!Memory.TowerAttackDamage[room.name]) Memory.TowerAttackDamage[room.name] = {};
-            if (hostile.hits < Memory.TowerAttackDamage[room.name].hp) towers.forEach(tower => tower.attack(hostile));
+            if (hostile.hits < Memory.TowerAttackDamage[room.name].hp && hostile.owner != 'bldinator') towers.forEach(tower => tower.attack(hostile));
             else resume = true;
             Memory.TowerAttackDamage[room.name] = { hp: hostile.hits };
         } else resume = true;
