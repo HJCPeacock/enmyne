@@ -32,13 +32,13 @@ var roleBuilder = {
             else {
 	            var sourceStorage = creep.pos.findClosestByRange(FIND_STRUCTURES, {
 	                filter: (structure) => {
-	                    return structure.structureType == STRUCTURE_STORAGE;
+	                    return structure.structureType == STRUCTURE_STORAGE || structure.structureType == STRUCTURE_CONTAINER;
 	                }
 	            });
 
 	            var source = creep.pos.findClosestByRange(FIND_SOURCES);
 
-	            if (sourceStorage && sourceStorage.store[RESOURCE_ENERGY] > 2000 && creep.pos.getRangeTo(sourceStorage) <= creep.pos.getRangeTo(source)) {
+	            if (sourceStorage && creep.pos.getRangeTo(sourceStorage) <= creep.pos.getRangeTo(source)) {
 	                if (creep.withdraw(sourceStorage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 	                    creep.moveTo(sourceStorage);
 	                }
