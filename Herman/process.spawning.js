@@ -215,9 +215,9 @@ var processSpawning = {
         {
             //based on roads
             if (roomCreeps.length <= 2 || (hasStorage && carriers.length == 0)) return [WORK, CARRY, CARRY, MOVE, MOVE];
-            if (room.energyCapacityAvailable >= 850 && hasLinks && hasStorage)
+            if (room.energyCapacityAvailable >= 850 && hasContainer)
                 return [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
-            if (room.energyCapacityAvailable >= 800 && (!hasLinks || !hasStorage))
+            if (room.energyCapacityAvailable >= 800 && !hasContainer)
                 return [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];//8 - 8 = 0
             if (room.energyCapacityAvailable >= 600)
                 return [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];//6 - 6 = 0
