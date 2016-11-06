@@ -96,7 +96,7 @@ module.exports.loop = function () {
     }
 
     function calculateAttackerCount(room) {
-        if (room.find(FIND_HOSTILE_CREEPS).length > 0 && room.name != 'E53N3') return 1;
+        if (room.find(FIND_HOSTILE_CREEPS).length > 0) return 1;
     }
 
     function calculateCarrierCount(room) {
